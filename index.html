@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>The Cappa Mountain Hotel</title>
+    <link rel="shortcut icon" href="img/favicon.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="css/plugins.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader-bg"></div>
+    <div id="preloader">
+        <div id="preloader-status">
+            <div class="preloader-position loader"> <span></span> </div>
+        </div>
+    </div>
+    <!-- Progress scroll totop -->
+    <div class="progress-wrap cursor-pointer">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <a class="logo" href="index.html"> 
+                    <img src="img/logo-light.png" class="logo-img" alt="Just Enjoy Ibiza Logo"> 
+                </a>
+            </div>
+            <!-- Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"><i class="ti-menu"></i></span> 
+            </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Home -->
+                  <!--   <li class="nav-item dropdown"> 
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Home <i class="ti-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="dropdown-item active"><span>Parallax Image</span></a></li>
+                            <li><a href="#" class="dropdown-item"><span>Slider</span></a></li>
+                            <li><a href="#" class="dropdown-item"><span>Video</span></a></li>
+                            <li><a href="#" class="dropdown-item"><span>Slideshow</span></a></li>
+                        </ul>
+                    </li> -->
+                    <!-- About -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    
+                    <!-- Yacht Services -->
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Services <i class="ti-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="yacht-rental.html" class="dropdown-item"><span>Yacht Rental</span></a></li>
+                            <li><a href="boat-rental.html" class="dropdown-item"><span>Boat Rental</span></a></li>
+                            <li><a href="boat-management.html" class="dropdown-item"><span>Boat Management</span></a></li>
+                            <li><a href="corporate-events.html" class="dropdown-item"><span>Corporate Events</span></a></li>
+                            <li><a href="holiday-planner.html" class="dropdown-item"><span>Holiday Planner</span></a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Fleet -->
+                    <li class="nav-item"><a class="nav-link" href="fleet.html">Our Fleet</a></li>
+    
+                    <!-- Gallery -->
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+    
+                    <!-- Testimonials -->
+                    <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+    
+                    <!-- News & Blog -->
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    
+                    <!-- Contact -->
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Parallax Image -->
+    <div class="banner-header full-height section-padding valign bg-img bg-fixed" data-overlay-dark="5" data-background="img/experience/1I4A8649.png">
+        <div class="container">
+            <div class="row justify-content-start">
+                <!-- Main Caption -->
+                <div class="col-lg-7 col-md-12 text-left">
+                    <div class="v-middle caption">
+                        <h4>Explore Ibiza in Style</h4>
+                        <h3>Experience Yacht Charters Like No Other</h3>
+                        <div class="butn-light mt-30 mb-30"> 
+                            <a href="#" data-scroll-nav="2"><span>Our Fleet & Services</span></a> 
+                        </div>
+                    </div>
+                </div>
+                <!-- Charter Inquiry Form -->
+               <!--  <div class="col-lg-5 col-md-12">
+                    <div class="charter-box">
+                        <div class="head-box">
+                            <h4>Plan Your Yacht Charter</h4>
+                        </div>
+                        <div class="charter-inner clearfix">
+                            <form action="inquiry.html" class="form1 clearfix">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input1_wrapper">
+                                            <label>Preferred Charter Date</label>
+                                            <div class="input1_inner">
+                                                <input type="text" class="form-control input datepicker" placeholder="Select a Date" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="select1_wrapper">
+                                            <label>Number of Guests</label>
+                                            <div class="select1_inner">
+                                                <select class="select2 select" style="width: 100%">
+                                                    <option value="0">Select Guests</option>
+                                                    <option value="1">1-4 Guests</option>
+                                                    <option value="2">5-10 Guests</option>
+                                                    <option value="3">10+ Guests</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="select1_wrapper">
+                                            <label>Type of Yacht</label>
+                                            <div class="select1_inner">
+                                                <select class="select2 select" style="width: 100%">
+                                                    <option value="0">Select Yacht Type</option>
+                                                    <option value="motor-yacht">Motor Yacht</option>
+                                                    <option value="sailing-yacht">Sailing Yacht</option>
+                                                    <option value="catamaran">Catamaran</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input1_wrapper">
+                                            <label>Special Requests</label>
+                                            <div class="input1_inner">
+                                                <textarea class="form-control input" placeholder="Let us know if you have any special requests" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn-form1-submit mt-15">Submit Inquiry</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- About -->
+    <section class="about section-padding" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-30 animate-box" data-animate-effect="fadeInUp">
+                    <div class="section-subtitle">Since 2007</div>
+                    <div class="section-title">Unmatched Yachting Experience in Ibiza</div>
+                    <p>Welcome to Just Enjoy Ibiza, where luxury meets personalised service. With years of experience since 2007, we strive to offer unforgettable moments on the beautiful waters of Ibiza. We take great pride in providing a bespoke yachting experience that exceeds expectations, backed by our passion for the sea and our deep knowledge of the industry.</p>
+                    <p>Myself, <strong>Julian</strong>, along with my trusted associate, <strong>Alin</strong>, have built a reputation for delivering excellence with every charter. Our goal is to make your time aboard our yachts seamless, luxurious, and truly memorable—whether you are looking to explore hidden coves, enjoy water sports, or simply relax and take in the breathtaking views.</p>
+                    <div class="about-bottom"> <img src="img/signature-dark.svg" alt="" class="image about-signature">
+                        <div class="about-name-wrapper">
+                            <div class="about-name">Julian Pirvu</div>
+                            <div class="about-rol">Co-Founder Just Enjoy Ibiza</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 animate-box" data-animate-effect="fadeInUp">
+                    <div class="img-exp">
+                        <div class="about-img">
+                            <div class="img"> <img src="img/experience/VQ82SeaStory87.JPG" class="img-fluid" alt=""> </div>
+                        </div>
+                        <div id="circle">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+                                <defs>
+                                    <path id="circlePath" d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 " />
+                                </defs>
+                                <circle cx="150" cy="100" r="75" fill="none" />
+                                <g>
+                                    <use xlink:href="#circlePath" fill="none" />
+                                    <text fill="#1A3D5D">
+                                        <textPath xlink:href="#circlePath"> . Just Enjoy Ibiza  . Yachts & Boats </textPath>
+                                    </text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Line -->
+    <div class="line-vr-section"></div>
+
+    <section class="candela-highlight section-padding bg-custom-blue">
+        <div class="container">
+            <div class="row">
+                <!-- Text Section -->
+                <div class="col-md-6 candela-info">
+                    <h3 class="candela-subtitle">Leading the Future of Boating</h3>
+                    <h1 class="candela-main-title">Just Enjoy Ibiza - First to Introduce Foiling Electric Boats</h1>
+                    <p class="candela-description">Experience Ibiza like never before with our Candela C-8, a revolutionary electric foiling boat that is leading the change in sustainable luxury boating.</p>
+    
+                    <ul class="candela-benefits">
+                        <li><i class="fas fa-leaf candela-icon"></i> Zero Emissions for a Greener Ibiza</li>
+                        <li><i class="fas fa-tachometer-alt candela-icon"></i> Up to 30 Knots of Smooth, Silent Speed</li>
+                        <li><i class="fas fa-balance-scale candela-icon"></i> Autonomous Flight Control for Stability</li>
+                        <li><i class="fas fa-battery-full candela-icon"></i> Travel 50 Nautical Miles on a Single Charge</li>
+                    </ul>
+    
+                    <!-- Call to Action -->
+                    <a href="#" class="candela-cta">Learn More</a>
+                </div>
+    
+                <!-- Image Section -->
+                <div class="col-md-6 candela-image">
+                    <img src="img/experience/Candela-C-8-Hydrofoiling-Electric-boat-1-1.webp" alt="Candela C-8 Electric Boat" class="candela-boat-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Promo Video -->
+    <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="5" data-background="img/services/VQ82SeaStory86.JPG">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <!-- Star Rating -->
+                    <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                    <!-- Section Subtitle and Title -->
+                    <div class="section-subtitle"><span>Just Enjoy Ibiza</span></div>
+                    <div class="section-title"><span>Experience the Best of Ibiza</span></div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <a class="vid" href="https://youtube.com/shorts/5ycIkq3AFQ8?si=bj6KOqnO6i94z5Hz">
+                        <div class="vid-butn"> <span class="icon"><i class="ti-control-play"></i></span> </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing -->
+    <section class="pricing section-padding">
+        <div class="container">
+            <div class="row">
+                <!-- Introductory Information Column -->
+                <div class="col-md-4">
+                    <div class="section-subtitle"><span>Exclusive Experiences</span></div>
+                    <div class="section-title">Unforgettable Adventures Await</div>
+                    <p>Discover the best of Ibiza with our exclusive experiences tailored for unforgettable moments. From thrilling yacht adventures to relaxing holiday plans, we have something for everyone.</p>
+                    <p>Our curated experiences are designed to bring out the best of Ibiza’s natural beauty, luxury, and entertainment for you and your guests.</p>
+                    <div class="reservations mb-30">
+                        <div class="icon"><span class="flaticon-call"></span></div>
+                        <div class="text">
+                            <p>Information</p> <a href="tel:855-100-4444">855 100 4444</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experiences Carousel Column -->
+                <div class="col-md-8">
+                    <div class="owl-carousel owl-theme">
+                        <!-- Sunset Cruise Experience -->
+                        <div class="pricing-card">
+                            <div class="img"><img src="img/experience/1I4A9119.png" alt="Sunset Cruise"></div>
+                            <div class="desc">
+                                <div class="name">Sunset Cruise</div>
+                                <div class="amount">€500<span>/ group</span></div>
+                                <ul class="list-unstyled list">
+                                    <li><i class="ti-check"></i> Private yacht for up to 8 people</li>
+                                    <li><i class="ti-check"></i> Complimentary drinks onboard</li>
+                                    <li><i class="ti-check"></i> Enjoy the best Ibiza sunset spots</li>
+                                    <li><i class="ti-close unavailable"></i>Food not included</li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <!-- Island Hopping Experience -->
+                        <div class="pricing-card">
+                            <div class="img"><img src="img/experience/Island.png" alt="Island Hopping"></div>
+                            <div class="desc">
+                                <div class="name">Formentera Hopping</div>
+                                <div class="amount">€800<span>/ group</span></div>
+                                <ul class="list-unstyled list">
+                                    <li><i class="ti-check"></i> Visit multiple hidden coves</li>
+                                    <li><i class="ti-check"></i> Experienced crew included</li>
+                                    <li><i class="ti-check"></i> Custom itinerary options</li>
+                                    <li><i class="ti-close unavailable"></i>Alcoholic drinks not included</li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <!-- Luxury Yacht Party -->
+                        <div class="pricing-card">
+                            <div class="img"><img src="img/experience/LuxuryYacht.png" alt="Luxury Yacht Party"></div>
+                            <div class="desc">
+                                <div class="name">Luxury Yacht Experience</div>
+                                <div class="amount">€1200<span>/ group</span></div>
+                                <ul class="list-unstyled list">
+                                    <li><i class="ti-check"></i> DJ & Sound System included</li>
+                                    <li><i class="ti-check"></i> Drinks & snacks onboard</li>
+                                    <li><i class="ti-check"></i> Sail along Ibiza’s coast</li>
+                                    <li><i class="ti-close unavailable"></i>Maximum 12 guests</li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <!-- Water Sports Adventure -->
+                    <!--     <div class="pricing-card">
+                            <div class="img"><img src="img/experience/water-sports.jpg" alt="Water Sports Adventure"></div>
+                            <div class="desc">
+                                <div class="name">Water Sports Adventure</div>
+                                <div class="amount">€600<span>/ group</span></div>
+                                <ul class="list-unstyled list">
+                                    <li><i class="ti-check"></i> Jet skis, paddle boards & snorkelling</li>
+                                    <li><i class="ti-check"></i> Equipment rental included</li>
+                                    <li><i class="ti-check"></i> 4-hour duration</li>
+                                    <li><i class="ti-close unavailable"></i>Instructor not included</li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        
+                        <!-- Romantic Getaway Experience -->
+                        <div class="pricing-card">
+                            <div class="img"><img src="img/experience/RomanticSunset.png" alt="Romantic Getaway"></div>
+                            <div class="desc">
+                                <div class="name">Romantic Getaway</div>
+                                <div class="amount">€700<span>/ couple</span></div>
+                                <ul class="list-unstyled list">
+                                    <li><i class="ti-check"></i> Private yacht for the evening</li>
+                                    <li><i class="ti-check"></i> Champagne & roses included</li>
+                                    <li><i class="ti-check"></i> Dinner at sea</li>
+                                    <li><i class="ti-close unavailable"></i>Photography not included</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Line -->
+    <div class="line-vr-section"></div>
+    <!-- Services -->
+    <section class="services section-padding bg-darkbrown">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-30 text-center">
+                    <div class="section-subtitle">What We Do</div>
+                    <div class="section-title"><span>Our Services</span></div>
+                </div>
+            </div>
+            
+            <!-- Boat Rental Section -->
+            <div class="row">
+                <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="img left">
+                        <a href="boat-rental.html"><img src="img/services/38Pardo87.jpg" alt="Boat Rental"></a>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0 bg-darkbrown valign animate-box" data-animate-effect="fadeInRight">
+                    <div class="content">
+                        <div class="cont text-left">
+                            <h4>Boat Rental</h4>
+                            <p>Experience the best of Ibiza with our premium boat rental services. Choose from a variety of boats that cater to every style, ensuring you enjoy the perfect day out on the Mediterranean.</p>
+                            <div class="butn-dark"> <a href="boat-rental.html"><span>Explore Boat Rental</span></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Yacht Rental Section -->
+            <div class="row">
+                <div class="col-md-6 bg-darkbrown p-0 order2 valign animate-box" data-animate-effect="fadeInLeft">
+                    <div class="content">
+                        <div class="cont text-left">
+                            <h4>Yacht Rental</h4>
+                            <p>Indulge in luxury with our exclusive yacht rental services. We offer an impressive fleet of yachts, perfect for exploring Ibiza’s coastline in unparalleled comfort and elegance.</p>
+                            <div class="butn-dark"> <a href="yacht-rental.html"><span>Discover Yachts</span></a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0 order1 animate-box" data-animate-effect="fadeInRight">
+                    <div class="img">
+                        <a href="yacht-rental.html"><img src="img/services/VQ82SeaStory86.JPG" alt="Yacht Rental"></a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Boat Management Section -->
+            <div class="row">
+                <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="img left">
+                        <a href="boat-management.html"><img src="img/services/Yacht-Propeller.png" alt="Boat Management"></a>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0 bg-darkbrown valign animate-box" data-animate-effect="fadeInRight">
+                    <div class="content">
+                        <div class="cont text-left">
+                            <h4>Boat Management</h4>
+                            <p>Let us take care of your vessel with our professional boat management services. From maintenance to crew, we ensure your boat is always ready for your next adventure.</p>
+                            <div class="butn-dark"> <a href="boat-management.html"><span>Learn More</span></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Corporate Events Section -->
+            <div class="row">
+                <div class="col-md-6 bg-darkbrown p-0 order2 valign animate-box" data-animate-effect="fadeInLeft">
+                    <div class="content">
+                        <div class="cont text-left">
+                            <h4>Corporate Events</h4>
+                            <p>Elevate your corporate experiences with bespoke yacht charters for team building or client entertainment. Create unforgettable moments on the waters of Ibiza for your business associates.</p>
+                            <div class="butn-dark"> <a href="corporate-events.html"><span>Plan Your Event</span></a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0 order1 animate-box" data-animate-effect="fadeInRight">
+                    <div class="img">
+                        <a href="corporate-events.html"><img src="img/slider/Music-sailing-yacht.jpg" alt="Corporate Events"></a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Holiday Planner Section -->
+            <div class="row">
+                <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="img left">
+                        <a href="holiday-planner.html"><img src="img/services/Travel-planner.png" alt="Holiday Planner"></a>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0 bg-darkbrown valign animate-box" data-animate-effect="fadeInRight">
+                    <div class="content">
+                        <div class="cont text-left">
+                            <h4>Holiday Planner</h4>
+                            <p>Leave the planning to us. Whether it’s a romantic getaway or an adventure-filled holiday, our customised holiday planning services make sure you experience the best of Ibiza.</p>
+                            <div class="butn-dark"> <a href="holiday-planner.html"><span>Plan Your Holiday</span></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Line -->
+    <div class="line-vr-section"></div>
+    <!--Why Choose us -->
+    <section class="facilities section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-30 text-center">
+                    <div class="section-subtitle">Just Enjoy Ibiza</div>
+                    <div class="section-title">Why Choose Us</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-facility">
+                        <span class="facility-icon flaticon-boat"></span>
+                        <h5>Luxurious Fleet</h5>
+                        <p>We offer a premium selection of yachts, ensuring top-tier comfort and elegance for your Ibiza adventure.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-facility">
+                        <span class="facility-icon flaticon-crew"></span>
+                        <h5>Experienced Crew</h5>
+                        <p>Our professional and friendly crew is here to provide you with a seamless and enjoyable experience, tailored to your needs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-facility">
+                        <span class="facility-icon flaticon-map"></span>
+                        <h5>Customised Itineraries</h5>
+                        <p>Discover Ibiza your way with our personalised routes, exploring hidden coves, stunning beaches, and iconic landmarks.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-facility">
+                        <span class="facility-icon flaticon-party"></span>
+                        <h5>Exclusive Experiences</h5>
+                        <p>Whether you’re seeking a relaxed sunset cruise or a vibrant party at sea, we create memorable experiences tailored for you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-facility">
+                        <span class="facility-icon flaticon-gourmet"></span>
+                        <h5>Gourmet Catering</h5>
+                        <p>Indulge in gourmet catering with a selection of fine wines, freshly prepared by our chefs, to make your journey unforgettable.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-facility">
+                        <span class="facility-icon flaticon-safety"></span>
+                        <h5>Safety & Comfort</h5>
+                        <p>Your safety is our priority. All of our yachts are equipped with modern safety features to ensure a carefree journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testiominals -->
+    <section class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/main1.jpg" data-overlay-dark="5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 text-center">
+                    <div class="testimonials">
+                        <div class="testimonials-box">
+                            <div class="owl-carousel owl-theme">
+                                <div class="item"> 
+                                    <span>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                    </span>
+                                    <h5>A Dreamy Day on the Mediterranean!</h5>
+                                    <p>"The team at Just Enjoy Ibiza made our yacht experience absolutely unforgettable. The crew was friendly and professional, the yacht was pristine, and the entire day felt luxurious and carefree. We even got to see dolphins! We’ll definitely be back next summer. Highly recommended!"</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="img/team/4.jpg" alt=""> </div>
+                                        <div class="cont">
+                                            <h6>Jessica Walker</h6> <span>Customer review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="item"> 
+                                    <span>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                    </span>
+                                    <h5>Incredible Service and Stunning Views</h5>
+                                    <p>"Just Enjoy Ibiza provided us with an incredible yacht charter experience. Everything was seamless—from the booking process to the warm welcome onboard. The sunset cruise was magical, and we couldn't have asked for a better way to experience Ibiza. The crew took care of every little detail, making it a trip to remember."</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="img/team/2.jpg" alt=""> </div>
+                                        <div class="cont">
+                                            <h6>Emily White</h6> <span>Customer review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item"> 
+                                    <span>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                    </span>
+                                    <h5>Perfect Day on the Water</h5>
+                                    <p>"I booked a yacht charter with Just Enjoy Ibiza for my partner's birthday, and it was perfect in every way. The staff surprised us with a special birthday setup, and the cruise along the Ibiza coastline was stunning. We loved the personalised service and the relaxed yet luxurious atmosphere. A big thank you to the team!"</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="img/team/3.jpg" alt=""> </div>
+                                        <div class="cont">
+                                            <h6>Daniel Martin</h6> <span>Customer review</span>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- News -->
+    <section class="news section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-30 text-center">
+                    <div class="section-subtitle"><span>Ibiza Blog</span></div>
+                    <div class="section-title custom-heading-color">Latest News & Updates</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="img/news/1.jpg" alt="">
+                                <div class="date">
+                                    <a href="post.html"> <span>Dec</span> <i>02</i> </a>
+                                </div>
+                            </div>
+                            <div class="con"> 
+                                <span class="category">
+                                    <a href="news.html" style="color: #2095AE;">Dining Delights</a>
+                                </span>
+                                <h5><a href="post.html">Top Culinary Experiences in Ibiza</a></h5>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="img/news/2.jpg" alt="">
+                                <div class="date">
+                                    <a href="post.html"> <span>Dec</span> <i>04</i> </a>
+                                </div>
+                            </div>
+                            <div class="con"> 
+                                <span class="category">
+                                    <a href="news.html" style="color: #2095AE;">Relaxation & Spa</a>
+                                </span>
+                                <h5><a href="post.html">The Best Spa Retreats for Yacht Guests</a></h5>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="img/news/3.jpg" alt="">
+                                <div class="date">
+                                    <a href="post.html"> <span>Dec</span> <i>06</i> </a>
+                                </div>
+                            </div>
+                            <div class="con"> 
+                                <span class="category">
+                                    <a href="news.html" style="color: #2095AE;">Luxury Interiors</a>
+                                </span>
+                                <h5><a href="post.html">Top Yacht Luxury Essentials</a></h5>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="img/news/4.jpg" alt="">
+                                <div class="date">
+                                    <a href="post.html"> <span>Dec</span> <i>08</i> </a>
+                                </div>
+                            </div>
+                            <div class="con"> 
+                                <span class="category">
+                                    <a href="news.html" style="color: #2095AE;">Health & Wellness</a>
+                                </span>
+                                <h5><a href="post.html">Staying Fit Onboard: Fitness Tips</a></h5>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="img/news/6.jpg" alt="">
+                                <div class="date">
+                                    <a href="post.html"> <span>Dec</span> <i>08</i> </a>
+                                </div>
+                            </div>
+                            <div class="con"> 
+                                <span class="category">
+                                    <a href="news.html" style="color: #2095AE;">Yacht Design</a>
+                                </span>
+                                <h5><a href="post.html">Modern Yacht Interior Design Trends</a></h5>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="img/news/5.jpg" alt="">
+                                <div class="date">
+                                    <a href="post.html"> <span>Dec</span> <i>08</i> </a>
+                                </div>
+                            </div>
+                            <div class="con"> 
+                                <span class="category">
+                                    <a href="news.html" style="color: #2095AE;">Water Activities</a>
+                                </span>
+                                <h5><a href="post.html">Health Benefits of Swimming in the Med</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Reservation & Booking Form -->
+    <section class="reservation">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/Music-sailing-yacht.jpg" data-overlay-dark="5">
+
+            <div class="container">
+                <div class="row">
+                    <!-- Contact Information -->
+                    <div class="col-lg-5 col-md-12 mb-30 mt-30">
+                        <p><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></p>
+                        <h5>We are here to help you plan the perfect yacht experience. Reach out to us anytime!</h5>
+                        <div class="reservations">
+                            <div class="icon color-1"><span class="flaticon-call"></span></div>
+                            <div class="text">
+                                <p class="color-1" style="color: #2095AE;">Contact Us</p>
+                                <a class="color-1" href="tel:855-100-4444">855 100 4444</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact Form -->
+                    <div class="col-lg-5 offset-lg-2 col-md-12">
+                        <div class="booking-box" style="background-color: #F5F5F5">
+                            <div class="head-box text-center">
+                                <h4>Contact Us</h4>
+                            </div>
+                            <div class="booking-inner clearfix">
+                                <form action="#" class="form1 clearfix">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="input1_wrapper">
+                                                <label>Your Name</label>
+                                                <div class="input1_inner">
+                                                    <input type="text" class="form-control input" placeholder="Your Name" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input1_wrapper">
+                                                <label>Email Address</label>
+                                                <div class="input1_inner">
+                                                    <input type="email" class="form-control input" placeholder="Email Address" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input1_wrapper">
+                                                <label>Phone Number</label>
+                                                <div class="input1_inner">
+                                                    <input type="tel" class="form-control input" placeholder="Phone Number" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input1_wrapper">
+                                                <label>Message</label>
+                                                <div class="input1_inner">
+                                                    <textarea class="form-control input" rows="4" placeholder="Your Message" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn-form1-submit mt-15">Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Clients -->
+    <section class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="owl-carousel owl-theme">
+                        <!-- <div class="clients-logo">
+                            <a href="#0"><img src="img/clients/1.png" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="img/clients/2.png" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="img/clients/3.png" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="img/clients/4.png" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="img/clients/5.png" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="img/clients/6.png" alt=""></a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-column footer-about">
+                            <h3 class="footer-title">About Just Enjoy Ibiza</h3>
+                            <p class="footer-about-text">Welcome to Just Enjoy Ibiza! Let’s make your island dreams come true with luxury yacht adventures and unforgettable memories.</p>
+                            <div class="footer-language"> <i class="lni ti-world"></i>
+                                <select onchange="location = this.value;">
+                                    <option value="http://duruthemes.com/">English</option>
+                                    <option value="http://duruthemes.com/">German</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 offset-md-1">
+                        <div class="footer-column footer-explore clearfix">
+                            <h3 class="footer-title">Explore</h3>
+                            <ul class="footer-explore-list list-unstyled">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="rooms.html">Yachts/Boats</a></li>
+                                <li><a href="restaurant.html">Holiday Planner</a></li>
+                                <li><a href="spa-wellness.html">Corporate</a></li>
+                                <li><a href="about.html">About Hotel</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-column footer-contact">
+                            <h3 class="footer-title">Contact</h3>
+                            <p class="footer-contact-text">23 Puerto Botafoc, Ibiza, 07800
+                                <br>Spain
+                            </p>
+                            <div class="footer-contact-info">
+                                <p class="footer-contact-phone"><span class="flaticon-call"></span> + 34 692 688 348</p>
+                                <p class="footer-contact-mail">info@justenjoyibiza.com</p>
+                            </div>
+                            <div class="footer-about-social-list"> <a href="#"><i class="ti-instagram"></i></a> <a href="#"><i class="ti-twitter"></i></a> <a href="#"><i class="ti-youtube"></i></a> <a href="#"><i class="ti-facebook"></i></a> <a href="#"><i class="ti-pinterest"></i></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </footer>
+    <!-- jQuery -->
+    <script src="js/jquery-3.6.3.min.js"></script>
+    <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/jquery.isotope.v3.0.2.js"></script>
+    <script src="js/pace.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scrollIt.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/YouTubePopUp.js"></script>
+    <script src="js/select2.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>$(document).ready(function(){
+        $(".candela-carousel").owlCarousel({
+          loop: true,
+          margin: 10,
+          nav: true,
+          items: 1,
+          autoplay: true,
+          autoplayTimeout: 5000,
+          autoplayHoverPause: true
+        });
+      });
+      </script>
+</body>
+</html>
