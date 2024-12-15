@@ -10,12 +10,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json()); // Parse JSON bodies
 
-// Serve static files (CSS, JS, images, etc.)
-app.use(express.static(__dirname));
+// Serve Static Files from 'public' Directory
+app.use(express.static('public'));
 
-// Root route to serve index.html
+// Root Route to Serve index.html
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 // Endpoint to get ChatGPT response
@@ -34,7 +34,7 @@ app.post('/chat', async (req, res) => {
                 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
             },
             body: JSON.stringify({
-                model: "gpt-4", // OpenAI GPT-4 model
+                model: "gpt-4", // Use the appropriate OpenAI model
                 messages: [
                     { role: "system", content: "You are a helpful assistant for a yacht rental company." },
                     { role: "user", content: userMessage }
@@ -44,7 +44,7 @@ app.post('/chat', async (req, res) => {
         });
 
         const data = await response.json();
-        const botResponse = data.choices[0]?.message?.content || 'No response from ChatGPT';
+        const botResponse = data.choices[0].message.content;
 
         res.json({ response: botResponse });
     } catch (error) {
@@ -73,6 +73,11 @@ app.post('/save-details', async (req, res) => {
         console.error('Error saving details to Google Sheets:', error);
         res.status(500).json({ error: 'Failed to save details' });
     }
+});
+
+// Catch-All Route for Serving index.html (Handles SPA Navigation)
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 // Start the server
