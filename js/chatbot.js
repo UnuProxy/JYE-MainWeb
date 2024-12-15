@@ -1,79 +1,148 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const saveUserForm = document.getElementById('save-user-form');
-    const chatForm = document.getElementById('chat-form');
     const messagesContainer = document.getElementById('messages');
-    let sessionId = null; // To hold the session ID for the user
+    const userInputField = document.getElementById('user-input');
+    const formContainer = document.getElementById('form-container');
+    const fullNameInput = document.getElementById('full-name');
+    const phoneNumberInput = document.getElementById('phone-number');
 
-    // Save user details and start chat
-    saveUserForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    let formDisplayed = false; // Prevent multiple form displays
+    let userDetailsSubmitted = false; // Ensure user details are saved only once
 
-        const name = document.getElementById('user-name').value.trim();
-        const phone = document.getElementById('user-phone').value.trim();
+    /**
+     * Append a message to the chat.
+     * @param {string} sender - 'user' or 'bot'
+     * @param {string} message - Message text to display
+     * @param {boolean} isForm - Whether to display the form
+     */
+    function appendMessage(sender, message, isForm = false) {
+        const messageClass = sender === 'user' ? 'user' : 'bot';
 
-        if (!name || !phone) {
-            alert("Please enter both your name and phone number.");
-            return;
+        if (isForm && !formDisplayed) {
+            formDisplayed = true;
+
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot';
+            botMessage.textContent = message;
+
+            const formWrapper = document.createElement('div');
+            formWrapper.className = 'form-wrapper';
+
+            const formClone = formContainer.cloneNode(true);
+            formClone.style.display = 'block';
+
+            formWrapper.appendChild(formClone);
+            messagesContainer.appendChild(botMessage);
+            messagesContainer.appendChild(formWrapper);
+
+            const userDetailsForm = formClone.querySelector('form');
+            userDetailsForm.addEventListener('submit', handleFormSubmit);
+        } else if (!isForm) {
+            const newMessage = `<div class="message ${messageClass}">${message}</div>`;
+            messagesContainer.insertAdjacentHTML('beforeend', newMessage);
         }
 
-        // Save user data via the /save-user endpoint
-        try {
-            const response = await fetch('/save-user', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, phone })
-            });
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
 
-            const data = await response.json();
-            if (data.success) {
-                sessionId = data.sessionId;
-                messagesContainer.innerHTML += `<div class="message bot">Welcome, ${name}! How can I help you today?</div>`;
-                saveUserForm.reset();
-            } else {
-                alert("Failed to save user data.");
-            }
-        } catch (error) {
-            console.error("Error saving user data:", error);
-            alert("Something went wrong.");
-        }
-    });
-
-    // Send message to chatbot and receive response
-    chatForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const userInput = document.getElementById('user-input').value.trim();
+    /**
+     * Handle user message submission.
+     */
+    window.sendMessage = async () => {
+        const userInput = userInputField.value.trim();
         if (!userInput) return;
 
-        messagesContainer.innerHTML += `<div class="message user">${userInput}</div>`;
-        document.getElementById('user-input').value = ''; // Clear input field
-        messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to latest message
+        appendMessage('user', userInput);
+        userInputField.value = '';
 
-        if (!sessionId) {
-            alert("Please enter your details first.");
-            return;
+        if (!userDetailsSubmitted) {
+            setTimeout(() => {
+                appendMessage('bot', "Thank you for reaching out! 😊 How can I assist you today?");
+            }, 500);
+
+            setTimeout(() => {
+                appendMessage(
+                    'bot',
+                    "Before we continue, could you kindly share your full name and phone number? This will help us follow up if needed.",
+                    true
+                );
+            }, 1500);
+        } else {
+            // Fetch response from ChatGPT backend
+            appendMessage('bot', "Let me check that for you...");
+            const botResponse = await fetchChatGPTResponse(userInput);
+            appendMessage('bot', botResponse);
         }
+    };
 
-        // Send the user input to the /chat endpoint
+    /**
+     * Fetch ChatGPT response from the backend.
+     * @param {string} userMessage - The user's input message
+     * @returns {Promise<string>} - ChatGPT's response
+     */
+    async function fetchChatGPTResponse(userMessage) {
         try {
-            const businessInfo = "You are an assistant for Just Enjoy Ibiza, a company specialising in yacht charters, holiday planning, and corporate event services."; // Adjust business info as needed
-
-            const response = await fetch('/chat', {
+            const response = await fetch('http://localhost:3000/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userInput, businessInfo, sessionId })
+                body: JSON.stringify({ userMessage }),
             });
 
             const data = await response.json();
-            if (data.botResponse) {
-                messagesContainer.innerHTML += `<div class="message bot">${data.botResponse}</div>`;
-                messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to latest message
-            } else {
-                alert("Failed to get response from the chatbot.");
-            }
+            return data.response || "I'm here to assist! Let me know more details.";
         } catch (error) {
-            console.error("Error sending message:", error);
-            alert("Something went wrong.");
+            console.error("Error fetching ChatGPT response:", error);
+            return "Sorry, I'm experiencing technical difficulties. Please try again later.";
         }
-    });
+    }
+
+    /**
+     * Handle form submission to save user details.
+     */
+    function handleFormSubmit(event) {
+        event.preventDefault();
+
+        const fullName = event.target.querySelector('#full-name').value.trim();
+        const phoneNumber = event.target.querySelector('#phone-number').value.trim();
+
+        if (!fullName || !phoneNumber) {
+            alert("Please provide both your full name and phone number.");
+            return;
+        }
+
+        // Send details to backend
+        fetch('http://localhost:3000/save-details', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fullName, phoneNumber }),
+        })
+        .then(() => {
+            appendMessage('bot', `Thank you, ${fullName}! 😊 We can now continue our conversation.`);
+            const formWrapper = document.querySelector('.form-wrapper');
+            if (formWrapper) formWrapper.remove(); // Remove form after submission
+            userDetailsSubmitted = true;
+            formDisplayed = false; // Reset form flag
+        })
+        .catch(error => {
+            console.error("Error saving user details:", error);
+            appendMessage('bot', "Something went wrong. Please try again.");
+        });
+    }
+
+    /**
+     * Close chatbot widget.
+     */
+    window.closeChat = (event) => {
+        event.stopPropagation();
+        const widget = document.getElementById('chatbot-widget');
+        widget.style.display = 'none';
+    };
+
+    /**
+     * Toggle chatbot visibility.
+     */
+    window.toggleChat = () => {
+        const widget = document.getElementById('chatbot-widget');
+        widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
+    };
 });
+
