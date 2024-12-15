@@ -10,6 +10,14 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json()); // Parse JSON bodies
 
+// Serve static files (CSS, JS, images, etc.)
+app.use(express.static(__dirname));
+
+// Root route to serve the index.html file
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
 // Endpoint to get ChatGPT response
 app.post('/chat', async (req, res) => {
     const { userMessage } = req.body;
@@ -71,4 +79,5 @@ app.post('/save-details', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
 
