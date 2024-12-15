@@ -13,7 +13,7 @@ app.use(express.json()); // Parse JSON bodies
 // Serve static files (CSS, JS, images, etc.)
 app.use(express.static(__dirname));
 
-// Root route to serve the index.html file
+// Root route to serve index.html
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
@@ -34,7 +34,7 @@ app.post('/chat', async (req, res) => {
                 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
             },
             body: JSON.stringify({
-                model: "gpt-4", // Use the appropriate OpenAI model
+                model: "gpt-4",
                 messages: [
                     { role: "system", content: "You are a helpful assistant for a yacht rental company." },
                     { role: "user", content: userMessage }
