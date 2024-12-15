@@ -964,18 +964,18 @@ color: #91765a;
     color: #fff;
 }
 .navbar .navbar-nav .nav-link:hover {
-    color: #91765a;
+    color:  #2095AE;
 }
 .navbar .navbar-nav .active {
-    color: #91765a !important;
+    color: #2095AE !important;
 }
 .navbar .navbar-nav .active i {
-    color: #91765a;
+    color: #2095AE;
 }
 
 
 .nav-scroll {
-    background: #14100c;
+    background:  #1A3D5D;
     padding: 0 0 0 0;
     position: fixed;
     top: -100px;
@@ -995,13 +995,13 @@ color: #91765a;
 }
 .nav-scroll .navbar-toggler-icon,
 .nav-scroll .icon-bar {
-    color: #91765a;
+    color: #2095AE;
 }
 .nav-scroll .navbar-nav .nav-link {
     color: #fff;
 }
 .nav-scroll .navbar-nav .active {
-    color: #91765a !important;
+    color: #2095AE !important;
 }
 .nav-scroll .navbar-nav .logo {
     padding: 15px 0;
@@ -1116,7 +1116,7 @@ color: #91765a;
 .navbar .dropdown-menu .dropdown:hover > .dropdown-item,
 .navbar .dropdown-menu .dropdown-item.active,
 .navbar .dropdown-menu .dropdown-item:hover {
-    color: #91765a;
+    color:  #2095AE;
 }
 .navbar .dropdown-toggle::after {
     display: none;
@@ -1147,7 +1147,7 @@ color: #91765a;
         padding: 15px;
         border-radius: 0;
         border: 0;
-        background-color: #14100c;
+        background-color: #1A3D5D;
         -webkit-transition: all .3s;
         transition: all .3s;
     }
@@ -1174,7 +1174,7 @@ color: #91765a;
         height: 90px;
     }
     .nav-scroll {
-        background: #14100c;
+        background: #1A3D5D;
     }
     .logo-wrapper {
         float: left;
@@ -1228,7 +1228,7 @@ color: #91765a;
         color: #fff !important;
     }
     .nav-scroll .navbar-collapse .active {
-        color: #91765a !important;
+        color: #2095AE !important;
     } 
     .navbar .dropdown-menu .dropdown-item {
         padding: 0 15px;
@@ -1253,7 +1253,7 @@ color: #91765a;
         padding: 0;
         border-radius: 0;
         margin: 0;
-        background: #14100c;
+        background: #1A3D5D;
         box-shadow: none;
     }
     .navbar .dropdown-submenu .dropdown-menu {
@@ -1280,7 +1280,7 @@ color: #91765a;
     .navbar .navbar-collapse {
         max-height: 450px;
         overflow: auto;
-        background: #14100c;
+        background: #1A3D5D;
         text-align: left;
         padding: 20px;
     }

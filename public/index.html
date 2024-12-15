@@ -22,9 +22,274 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-Kfwbd/fLx/tZz8F5ZhQbMd+qTQ6AZ/fkqZfy6SfVUsyK2ubkrK5g8BFCkrnygXWW7q8McuCqRABt/qMW3vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
         <!-- Local CSS Files -->
-        <link rel="stylesheet" href="/css/plugins.css" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/custom-styles.css" />
+        <link rel="stylesheet" href="/public/css/plugins.css" />
+        <link rel="stylesheet" href="/public/css/style.css" />
+        <link rel="stylesheet" href="/public/css/plugins" />
+        <style>
+            /* Floating Bubble */
+      #chatbot-floating-bubble {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: linear-gradient(135deg, #0078D7, #00A9F4);
+          color: white;
+          padding: 10px 15px;
+          border-radius: 50px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      #chatbot-floating-bubble:hover {
+          transform: scale(1.1);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Widget Container */
+      /* Ensure the chatbot widget is hidden by default */
+      #chatbot-widget {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 350px;
+          max-width: 90%;
+          font-family: 'Arial', sans-serif;
+          border-radius: 20px;
+          overflow: hidden;
+          z-index: 1001;
+          background: white;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          display: none; /* Hidden by default */
+          flex-direction: column;
+          max-height: 80vh; /* Restrict height to 80% of the viewport */
+      }
+      
+      
+      /* Header Section */
+      #chat-header {
+          background: linear-gradient(135deg, #004E92, #000428);
+          padding: 15px;
+          color: white;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 2px solid #003366;
+          flex-shrink: 0;
+      }
+      
+      #agent-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
+      
+      #agent-photo {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 2px solid white;
+      }
+      
+      #agent-name {
+          font-size: 16px;
+          font-weight: bold;
+      }
+      
+      #close-btn {
+        font-size: 20px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: absolute; 
+        top: 10px; 
+        right: 10px;
+        z-index: 10; 
+        transition: transform 0.3s ease;
+}
+
+#close-btn:hover {
+    transform: rotate(90deg);
+}
+
+      
+      /* Messages Section */
+      #messages {
+          flex-grow: 1;
+          padding: 15px;
+          overflow-y: auto; 
+          scroll-behavior: smooth; 
+          background: #f9f9f9;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          max-height: calc(80vh - 120px); 
+          word-wrap: break-word; 
+          word-break: break-word; 
+      }
+      
+      /* Ensure messages do not get cut off */
+      .message {
+          padding: 12px 15px;
+          border-radius: 15px;
+          font-size: 14px;
+          line-height: 1.5;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .message.bot {
+          background: #e1eaf5;
+          color: #333;
+          align-self: flex-start;
+      }
+      
+      .message.user {
+          background: #0078D7;
+          color: white;
+          align-self: flex-end;
+      }
+      
+      /* Input Section */
+      #user-input-container {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          background: #f1f1f1;
+          border-top: 1px solid #ddd;
+          gap: 10px;
+          flex-shrink: 0;
+          height: 60px; /* Fixed height for consistent appearance */
+      }
+      
+      #user-input {
+          flex-grow: 1;
+          padding: 10px 15px;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 25px;
+          outline: none;
+          word-break: break-word; 
+      }
+      
+      #send-btn {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 25px;
+          background: linear-gradient(135deg, #0078D7, #005BB5);
+          color: white;
+          font-size: 14px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+      
+      #send-btn:hover {
+          background: #004080;
+      }
+      
+      /* Responsive Design for Mobile */
+      @media (max-width: 480px) {
+          #chatbot-widget {
+              width: 100%; /* Take full width on small screens */
+              right: 0;
+              bottom: 0;
+              max-height: 90vh; /* Slightly increase height for smaller screens */
+          }
+      
+          #chat-header {
+              flex-direction: column;
+              align-items: flex-start;
+              padding: 10px;
+          }
+      
+          #user-input-container {
+              flex-direction: column;
+              height: auto; /* Allow flexibility on mobile */
+              padding: 10px;
+              gap: 5px;
+          }
+      
+          #user-input {
+              width: 100%; /* Expand input to full width */
+          }
+      
+          #send-btn {
+              width: 100%; /* Expand button to full width */
+          }
+      }
+      
+      
+      /* WhatsApp Button */
+      #whatsapp-btn {
+          background: linear-gradient(135deg, #25D366, #128C7E);
+          color: white;
+          font-size: 14px;
+          padding: 10px;
+          border-radius: 20px;
+          font-weight: bold;
+          margin: 10px auto;
+          display: none;
+          cursor: pointer;
+      }
+      
+      #whatsapp-btn:hover {
+          background: #128C7E;
+      }
+      /* Form Wrapper */
+      .form-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px;
+          background: #e1eaf5;
+          border-radius: 10px;
+      }
+      
+      /* Form Styling */
+      #user-details-form {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+      }
+      
+      #user-details-form label {
+          font-size: 14px;
+          font-weight: bold;
+          color: #333;
+      }
+      
+      #user-details-form input {
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 14px;
+      }
+      
+      #user-details-form button {
+          padding: 10px;
+          background: #0078D7;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s ease;
+      }
+      
+      #user-details-form button:hover {
+          background: #005BB5;
+      }
+      
+          </style>
     </head>
     
     
@@ -691,7 +956,7 @@
         </div>  
     </footer>
 
-   <script src="/js/chatbot.js"></script>
+   <script src="/public/js/chatbot.js"></script>
     <script>
         
         document.getElementById('contactForm').addEventListener('submit', function (e) {
@@ -723,24 +988,24 @@
             document.getElementById('thankYouModal').style.display = 'none';
         }
     </script>
-    <script src="/js/jquery-3.6.3.min.js"></script>
-    <script src="/js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="/js/modernizr-2.6.2.min.js"></script>
-    <script src="/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/js/jquery.isotope.v3.0.2.js"></script>
-    <script src="/js/pace.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/scrollIt.min.js"></script>
-    <script src="/js/jquery.waypoints.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/jquery.stellar.min.js"></script>
-    <script src="/js/jquery.magnific-popup.js"></script>
-    <script src="/js/YouTubePopUp.js"></script>
-    <script src="/js/select2.js"></script>
-    <script src="/js/datepicker.js"></script>
-    <script src="/js/smooth-scroll.min.js"></script>
-    <script src="/js/custom.js"></script>
+    <script src="/public/js/jquery-3.6.3.min.js"></script>
+    <script src="/public/js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="/public/js/modernizr-2.6.2.min.js"></script>
+    <script src="/public/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/public/js/jquery.isotope.v3.0.2.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/scrollIt.min.js"></script>
+    <script src="/public/js/jquery.waypoints.min.js"></script>
+    <script src="/public/js/owl.carousel.min.js"></script>
+    <script src="/public/js/jquery.stellar.min.js"></script>
+    <script src="/public/js/jquery.magnific-popup.js"></script>
+    <script src="/public/js/YouTubePopUp.js"></script>
+    <script src="/public/js/datepicker.js"></script>
+    <script src="/public/js/datepicker.js"></script>
+    <script src="/public/js/smooth-scroll.min.js"></script>
+    <script src="/public/js/custom.js"></script>
     <script>
     // JavaScript to handle compass interactivity for both desktop and mobile
     document.querySelectorAll('.compass-icon').forEach(icon => {
