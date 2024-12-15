@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json()); // Parse JSON bodies
 
-// Serve static files (CSS, JS, Images, etc.) from the root directory
+// Serve static files (CSS, JS, images, etc.)
 app.use(express.static(__dirname));
 
 // Root route to serve index.html
@@ -34,7 +34,7 @@ app.post('/chat', async (req, res) => {
                 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
             },
             body: JSON.stringify({
-                model: "gpt-4", // Use the appropriate OpenAI model
+                model: "gpt-4", // OpenAI GPT-4 model
                 messages: [
                     { role: "system", content: "You are a helpful assistant for a yacht rental company." },
                     { role: "user", content: userMessage }
@@ -44,7 +44,7 @@ app.post('/chat', async (req, res) => {
         });
 
         const data = await response.json();
-        const botResponse = data.choices[0].message.content;
+        const botResponse = data.choices[0]?.message?.content || 'No response from ChatGPT';
 
         res.json({ response: botResponse });
     } catch (error) {
