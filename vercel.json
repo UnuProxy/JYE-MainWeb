@@ -10,8 +10,8 @@
       "dest": "/public/$1/$2"
     },
     {
-      "src": "^/favicon\\.png$",
-      "dest": "/public/favicon.png"
+      "src": "^/img/just-enjoy-ibiza-favicon\\.png$",
+      "dest": "/public/img/just-enjoy-ibiza-favicon.png"
     },
     {
       "src": "/(.*)",
