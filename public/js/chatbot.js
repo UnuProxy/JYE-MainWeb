@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function fetchChatGPTResponse(userMessage) {
         try {
-            const response = await fetch('http://localhost:3000/chat', {
+            const response = await fetch('https://jye-main-web.vercel.app/chat', {
+
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userMessage }),
@@ -110,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Send details to backend
-        fetch('http://localhost:3000/save-details', {
+        fetch('https://jye-main-web.vercel.app/save-details', {
+
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ fullName, phoneNumber }),
