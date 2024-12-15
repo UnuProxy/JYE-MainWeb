@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let formDisplayed = false; // Prevent multiple form displays
     let userDetailsSubmitted = false; // Ensure user details are saved only once
 
+    const BASE_API_URL = window.location.origin; // Dynamically set the API URL
+
     /**
      * Append a message to the chat.
      * @param {string} sender - 'user' or 'bot'
@@ -81,17 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function fetchChatGPTResponse(userMessage) {
         try {
-            const response = await fetch('https://jye-main-web.vercel.app/chat', {
-
+            const response = await fetch(`${BASE_API_URL}/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userMessage }),
             });
 
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+            }
+
             const data = await response.json();
             return data.response || "I'm here to assist! Let me know more details.";
         } catch (error) {
-            console.error("Error fetching ChatGPT response:", error);
+            console.error("Error fetching ChatGPT response:", error.message);
             return "Sorry, I'm experiencing technical difficulties. Please try again later.";
         }
     }
@@ -111,13 +116,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Send details to backend
-        fetch('https://jye-main-web.vercel.app/save-details', {
-
+        fetch(`${BASE_API_URL}/save-details`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ fullName, phoneNumber }),
         })
-        .then(() => {
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to save details: ${response.status}`);
+            }
+
             appendMessage('bot', `Thank you, ${fullName}! 😊 We can now continue our conversation.`);
             const formWrapper = document.querySelector('.form-wrapper');
             if (formWrapper) formWrapper.remove(); // Remove form after submission
@@ -125,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formDisplayed = false; // Reset form flag
         })
         .catch(error => {
-            console.error("Error saving user details:", error);
+            console.error("Error saving user details:", error.message);
             appendMessage('bot', "Something went wrong. Please try again.");
         });
     }
