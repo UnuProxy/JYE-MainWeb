@@ -1452,7 +1452,16 @@ hr {
             z-index: 2;
         }
 
-
+        #availability-dot::after {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #28a745; /* Green for availability */
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
+            }
 /* ======= Slider-fade style (Homepage Slider) ======= */
 .slider-fade .owl-item {
     height: 100vh;
@@ -1517,7 +1526,7 @@ hr {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 5px;
-    text-align: right !important
+    text-align: right !important;
 }
 .slider-fade .owl-dots:after {
     position: absolute;
@@ -1562,14 +1571,14 @@ hr {
 }
 .slider-fade .owl-dots .owl-dot span {
     background: transparent;
-    display: none
+    display: none;
 }
 .slider-fade .owl-dots .owl-dot.active {
-    color: #91765a
+    color: #91765a;
 }
 .slider-fade .owl-dot:before {
     counter-increment: dots;
-    content: counter(dots)
+    content: counter(dots);
 }
 /* video field for slider */
 .header div.reservation {
@@ -1590,7 +1599,7 @@ hr {
 }
 
 
-.header div.reservation .call {
+/* .header div.reservation .call {
     color: #91765a;
     text-transform: uppercase;
     font-family: 'Outfit', sans-serif;
@@ -1599,7 +1608,7 @@ hr {
     font-size: 12px;
     line-height: 1.75em;
     margin-top: 15px;
-} 
+}  */
 
 .header div.reservation .call span {
     font-family: 'Outfit', sans-serif;
@@ -2315,7 +2324,7 @@ hr {
     padding: 30px 20px;
     position: relative;
     overflow: hidden;
-    background: #14100c;
+    background:  #14100c;
 }
 .team .info h6 {
     font-size: 18px;
@@ -2332,7 +2341,7 @@ hr {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #91765a;
+    background: #2095AE;
     -webkit-transition: all .4s;
     transition: all .4s;
 }
@@ -2486,11 +2495,16 @@ hr {
 
 /* Style for the container section */
 .facilities .single-facility {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border: 1px solid #2095AE; 
     padding: 20px; 
-    margin-bottom: 30px; 
+    margin-bottom: 20px; 
     transition: none !important; 
+    height: 220px;
 }
 
 .facilities .single-facility .facility-icon {
@@ -5088,7 +5102,7 @@ position: absolute;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-      align-items: center;
+    align-items: center;
   margin-top: 20px;
 }
 .footer-about-social-list a {
