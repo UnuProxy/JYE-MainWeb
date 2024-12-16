@@ -574,7 +574,7 @@ color: #91765a;
     top: -1px;
     left: -1px;
     border: 1px solid transparent;
-    border-top: 1px solid #91765a;
+    border-top: 1px solid #2095AE;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -1397,6 +1397,60 @@ hr {
     border: 0;
     border-top: 1px solid rgba(255,255,255,0.3);
 }
+
+
+
+/* ====== Compass Hero header =======*/
+         /* Minimal Compass Wrapper */
+         .minimal-compass-wrapper {
+            display: flex; /* Align icons inline */
+            justify-content: flex-start; /* Align items to the start */
+            gap: 20px; /* Add spacing between icons */
+            align-items: center; /* Center vertically */
+            margin-top: 20px; /* Add space above */
+            position: relative;
+        }
+        
+        /* Individual Compass Icons */
+        .compass-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align icon and label */
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        /* Icon Styling */
+        .compass-icon i {
+            font-size: 24px; /* Adjust icon size */
+            color: #FFFFFF; /* Brand colour for icons */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Add subtle shadow for contrast */
+            transition: transform 0.3s ease; /* Smooth scale effect */
+        }
+        
+        /* Hover Effect for Icons */
+        .compass-icon:hover i {
+            transform: scale(1.2); /* Enlarge on hover */
+            color: #2095AE; /* Change colour on hover */
+        }
+        
+        /* Tooltip Styling */
+        .compass-icon .tooltip {
+            position: absolute;
+            bottom: -30px; /* Position below the icon */
+            background: rgba(0, 0, 0, 0.7); /* Dark background for readability */
+            color: #FFFFFF; /* White text */
+            font-size: 12px;
+            padding: 5px 8px;
+            border-radius: 5px;
+            white-space: nowrap; /* Prevent text wrapping */
+            opacity: 0; /* Hide by default */
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+            transform: translateY(10px); /* Start slightly below */
+            pointer-events: none; /* Prevent interaction */
+            z-index: 2;
+        }
 
 
 /* ======= Slider-fade style (Homepage Slider) ======= */

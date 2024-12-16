@@ -1,4 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const agentNameElement = document.getElementById('agent-name'); // Dynamic name field
+    const agentPhoto = document.getElementById('agent-photo');      // Dynamic photo
+    const BASE_API_URL = window.location.origin;
+
+    /**
+     * Set dynamic agent name and photo based on time of day.
+     */
+    function setDynamicAgentName() {
+        const currentHour = new Date().getHours();
+        let agentName = "Just Enjoy Ibiza Assistant";
+        let photoSrc = "img/team/default.jpg";
+
+        if (currentHour >= 7 && currentHour < 19) {
+            agentName = "Julian (Available)";
+            photoSrc = "img/team/Julian-small.png";
+        } else {
+            agentName = "Alin (Available)";
+            photoSrc = "img/team/alin.ng";
+        }
+
+        // Update the DOM with the dynamic name and photo
+        if (agentNameElement) agentNameElement.textContent = agentName;
+        if (agentPhoto) agentPhoto.src = photoSrc;
+    }
+
+    // Call the function to update name and photo dynamically
+    setDynamicAgentName();
+
+    /**
+     * Existing Chatbot Logic
+     */
     const messagesContainer = document.getElementById('messages');
     const userInputField = document.getElementById('user-input');
     const formContainer = document.getElementById('form-container');
@@ -8,13 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let formDisplayed = false; // Prevent multiple form displays
     let userDetailsSubmitted = false; // Ensure user details are saved only once
 
-    const BASE_API_URL = window.location.origin; // Dynamically set the API URL
-
     /**
      * Append a message to the chat.
-     * @param {string} sender - 'user' or 'bot'
-     * @param {string} message - Message text to display
-     * @param {boolean} isForm - Whether to display the form
      */
     function appendMessage(sender, message, isForm = false) {
         const messageClass = sender === 'user' ? 'user' : 'bot';
@@ -78,8 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Fetch ChatGPT response from the backend.
-     * @param {string} userMessage - The user's input message
-     * @returns {Promise<string>} - ChatGPT's response
      */
     async function fetchChatGPTResponse(userMessage) {
         try {
@@ -155,4 +179,5 @@ document.addEventListener('DOMContentLoaded', () => {
         widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
     };
 });
+
 

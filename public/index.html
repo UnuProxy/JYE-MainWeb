@@ -17,282 +17,27 @@
         <!-- Google Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap">
-    
-        <!-- FontAwesome (Latest Version) -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-Kfwbd/fLx/tZz8F5ZhQbMd+qTQ6AZ/fkqZfy6SfVUsyK2ubkrK5g8BFCkrnygXWW7q8McuCqRABt/qMW3vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/0.1.2/css/themify-icons.css">
+        
         <!-- Local CSS Files -->
         <link rel="stylesheet" href="/css/plugins.css" />
         <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/plugins" />
+        <link rel="stylesheet" href="/css/widget.css">
         <style>
-            /* Floating Bubble */
-      #chatbot-floating-bubble {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          background: linear-gradient(135deg, #0078D7, #00A9F4);
-          color: white;
-          padding: 10px 15px;
-          border-radius: 50px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          font-size: 16px;
-          font-weight: bold;
-          cursor: pointer;
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      
-      #chatbot-floating-bubble:hover {
-          transform: scale(1.1);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
-      
-      /* Widget Container */
-      /* Ensure the chatbot widget is hidden by default */
-      #chatbot-widget {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          width: 350px;
-          max-width: 90%;
-          font-family: 'Arial', sans-serif;
-          border-radius: 20px;
-          overflow: hidden;
-          z-index: 1001;
-          background: white;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-          display: none; /* Hidden by default */
-          flex-direction: column;
-          max-height: 80vh; /* Restrict height to 80% of the viewport */
-      }
-      
-      
-      /* Header Section */
-      #chat-header {
-          background: linear-gradient(135deg, #004E92, #000428);
-          padding: 15px;
-          color: white;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 2px solid #003366;
-          flex-shrink: 0;
-      }
-      
-      #agent-info {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-      }
-      
-      #agent-photo {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: 2px solid white;
-      }
-      
-      #agent-name {
-          font-size: 16px;
-          font-weight: bold;
-      }
-      
-      #close-btn {
-        font-size: 20px;
-        color: white;
-        background: none;
-        border: none;
-        cursor: pointer;
-        position: absolute; 
-        top: 10px; 
-        right: 10px;
-        z-index: 10; 
-        transition: transform 0.3s ease;
+            #availability-dot::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #28a745; /* Green for availability */
+    border-radius: 50%;
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
-#close-btn:hover {
-    transform: rotate(90deg);
-}
-
-      
-      /* Messages Section */
-      #messages {
-          flex-grow: 1;
-          padding: 15px;
-          overflow-y: auto; 
-          scroll-behavior: smooth; 
-          background: #f9f9f9;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          max-height: calc(80vh - 120px); 
-          word-wrap: break-word; 
-          word-break: break-word; 
-      }
-      
-      /* Ensure messages do not get cut off */
-      .message {
-          padding: 12px 15px;
-          border-radius: 15px;
-          font-size: 14px;
-          line-height: 1.5;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      
-      .message.bot {
-          background: #e1eaf5;
-          color: #333;
-          align-self: flex-start;
-      }
-      
-      .message.user {
-          background: #0078D7;
-          color: white;
-          align-self: flex-end;
-      }
-      
-      /* Input Section */
-      #user-input-container {
-          display: flex;
-          align-items: center;
-          padding: 10px;
-          background: #f1f1f1;
-          border-top: 1px solid #ddd;
-          gap: 10px;
-          flex-shrink: 0;
-          height: 60px; /* Fixed height for consistent appearance */
-      }
-      
-      #user-input {
-          flex-grow: 1;
-          padding: 10px 15px;
-          font-size: 14px;
-          border: 1px solid #ccc;
-          border-radius: 25px;
-          outline: none;
-          word-break: break-word; 
-      }
-      
-      #send-btn {
-          padding: 10px 20px;
-          border: none;
-          border-radius: 25px;
-          background: linear-gradient(135deg, #0078D7, #005BB5);
-          color: white;
-          font-size: 14px;
-          font-weight: bold;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-      }
-      
-      #send-btn:hover {
-          background: #004080;
-      }
-      
-      /* Responsive Design for Mobile */
-      @media (max-width: 480px) {
-          #chatbot-widget {
-              width: 100%; /* Take full width on small screens */
-              right: 0;
-              bottom: 0;
-              max-height: 90vh; /* Slightly increase height for smaller screens */
-          }
-      
-          #chat-header {
-              flex-direction: column;
-              align-items: flex-start;
-              padding: 10px;
-          }
-      
-          #user-input-container {
-              flex-direction: column;
-              height: auto; /* Allow flexibility on mobile */
-              padding: 10px;
-              gap: 5px;
-          }
-      
-          #user-input {
-              width: 100%; /* Expand input to full width */
-          }
-      
-          #send-btn {
-              width: 100%; /* Expand button to full width */
-          }
-      }
-      
-      
-      /* WhatsApp Button */
-      #whatsapp-btn {
-          background: linear-gradient(135deg, #25D366, #128C7E);
-          color: white;
-          font-size: 14px;
-          padding: 10px;
-          border-radius: 20px;
-          font-weight: bold;
-          margin: 10px auto;
-          display: none;
-          cursor: pointer;
-      }
-      
-      #whatsapp-btn:hover {
-          background: #128C7E;
-      }
-      /* Form Wrapper */
-      .form-wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 10px;
-          background: #e1eaf5;
-          border-radius: 10px;
-      }
-      
-      /* Form Styling */
-      #user-details-form {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          width: 100%;
-      }
-      
-      #user-details-form label {
-          font-size: 14px;
-          font-weight: bold;
-          color: #333;
-      }
-      
-      #user-details-form input {
-          padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          font-size: 14px;
-      }
-      
-      #user-details-form button {
-          padding: 10px;
-          background: #0078D7;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          font-size: 14px;
-          font-weight: bold;
-          cursor: pointer;
-          transition: background 0.3s ease;
-      }
-      
-      #user-details-form button:hover {
-          background: #005BB5;
-      }
-      
-          </style>
+        </style>
     </head>
-    
-    
     
 <body>
     <!-- Preloader -->
@@ -573,91 +318,99 @@
     <section class="facilities section-padding">
         <div class="container">
             <div class="row">
+                <!-- Section Header -->
                 <div class="col-md-12 mb-30 text-center">
                     <div class="section-subtitle">Just Enjoy Ibiza</div>
                     <div class="section-title">Why Choose Us</div>
                 </div>
             </div>
             <div class="row">
+                <!-- Luxurious Fleet -->
                 <div class="col-lg-4 col-md-6">
                     <div class="single-facility">
                         <span class="facility-icon flaticon-boat"></span>
                         <h5>Luxurious Fleet</h5>
-                        <p>We offer a premium selection of yachts, ensuring top-tier comfort and elegance for your Ibiza adventure.</p>
+                        <p>Explore Ibiza aboard our carefully curated selection of premium yachts, where comfort, style, and elegance come together for the ultimate experience.</p>
                     </div>
                 </div>
+                <!-- Experienced Crew -->
                 <div class="col-lg-4 col-md-6">
                     <div class="single-facility">
                         <span class="facility-icon flaticon-crew"></span>
-                        <h5>Experienced Crew</h5>
-                        <p>Our professional and friendly crew is here to provide you with a seamless and enjoyable experience, tailored to your needs.</p>
+                        <h5>Expert Team & Crew</h5>
+                        <p>From professional crew members to expert holiday planners, our dedicated team ensures your experience is seamless, enjoyable, and stress-free.</p>
                     </div>
                 </div>
+                <!-- Customised Itineraries -->
                 <div class="col-lg-4 col-md-6">
                     <div class="single-facility">
                         <span class="facility-icon flaticon-map"></span>
-                        <h5>Customised Itineraries</h5>
-                        <p>Discover Ibiza your way with our personalised routes, exploring hidden coves, stunning beaches, and iconic landmarks.</p>
+                        <h5>Tailored Experiences</h5>
+                        <p>Every detail is customised to your preferences. Whether it’s hidden coves, private beaches, or vibrant hotspots, we design the perfect Ibiza escape for you.</p>
                     </div>
                 </div>
+                <!-- Exclusive Events -->
                 <div class="col-lg-4 col-md-6">
                     <div class="single-facility">
                         <span class="facility-icon flaticon-party"></span>
-                        <h5>Exclusive Experiences</h5>
-                        <p>Whether you’re seeking a relaxed sunset cruise or a vibrant party at sea, we create memorable experiences tailored for you.</p>
+                        <h5>Exclusive Events & Parties</h5>
+                        <p>Celebrate in style with private events and luxury parties at sea. From sunset cruises to lively celebrations, we make every moment unforgettable.</p>
                     </div>
                 </div>
+                <!-- Gourmet Dining -->
                 <div class="col-lg-4 col-md-6">
                     <div class="single-facility">
                         <span class="facility-icon flaticon-gourmet"></span>
-                        <h5>Gourmet Catering</h5>
-                        <p>Indulge in gourmet catering with a selection of fine wines, freshly prepared by our chefs, to make your journey unforgettable.</p>
+                        <h5>Fine Dining & Catering</h5>
+                        <p>Delight in exquisite dining with gourmet dishes and handpicked wines prepared by our chefs, turning every journey into a five-star experience.</p>
                     </div>
                 </div>
+                <!-- Safety & Comfort -->
                 <div class="col-lg-4 col-md-6">
                     <div class="single-facility">
                         <span class="facility-icon flaticon-safety"></span>
-                        <h5>Safety & Comfort</h5>
-                        <p>Your safety is our priority. All of our yachts are equipped with modern safety features to ensure a carefree journey.</p>
+                        <h5>Safety & Peace of Mind</h5>
+                        <p>Your safety and comfort are our top priorities. All our yachts are maintained to the highest standards, ensuring a carefree and secure adventure.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
 
     <!-- Testimonials -->
-<section class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/main1.jpg" data-overlay-dark="5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-12 text-center">
-                <div class="testimonials">
-                    <div class="testimonials-box">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item"> 
-                                <span>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                </span>
-                                <h5>A Dreamy Day on the Mediterranean!</h5>
-                                <p>"The team at Just Enjoy Ibiza made our yacht experience absolutely unforgettable. The crew was friendly and professional, the yacht was pristine, and the entire day felt luxurious and carefree. We even got to see dolphins! We’ll definitely be back next summer. Highly recommended!"</p>
-                                <div class="info">
-                                    <div class="author-img"> <img src="img/team/4.jpg" alt=""> </div>
-                                    <div class="cont">
-                                        <h6>Jessica Walker</h6> <span>Customer review</span>
+    <section class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/main1.jpg" data-overlay-dark="5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 text-center">
+                    <div class="testimonials">
+                        <div class="testimonials-box">
+                            <div class="owl-carousel owl-theme">
+                                <div class="item"> 
+                                    <span>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                        <i class="star-rating"></i>
+                                    </span>
+                                    <h5>A Dreamy Day on the Mediterranean!</h5>
+                                    <p>"The team at Just Enjoy Ibiza made our yacht experience absolutely unforgettable. The crew was friendly and professional, the yacht was pristine, and the entire day felt luxurious and carefree. We even got to see dolphins! We’ll definitely be back next summer. Highly recommended!"</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="img/team/4.jpg" alt=""> </div>
+                                        <div class="cont">
+                                            <h6>Jessica Walker</h6> <span>Customer review</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- Uncomment and fix the rest of the items if needed -->
                             </div>
-                            <!-- Uncomment and fix the rest of the items if needed -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     
     <!-- News -->
@@ -757,44 +510,45 @@
     </section>
     
     <!-- Chatbot Floating Bubble -->
-    <div id="chatbot-floating-bubble" onclick="toggleChat()">💬 Chat with us</div>
+    <div id="chatbot-floating-bubble" onclick="toggleChat()"> Chat with us </div>
 
-
-<!-- Chatbot Widget -->
-<div id="chatbot-widget" style="display: none;">
-    <!-- Chat Header -->
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" style="display: none;">
+        <!-- Chat Header -->
     <div id="chat-header">
         <div id="agent-info">
             <img id="agent-photo" src="img/team/2.jpg" alt="Agent" />
-            <span id="agent-name">Just Enjoy Ibiza Assistant</span>
+            <div id="agent-details">
+                <span id="agent-name"></span> <!-- Dynamic Name -->
+                <span id="availability-dot"></span> <!-- Green Dot -->
+            </div>
         </div>
         <button id="close-btn" onclick="closeChat(event)">×</button>
     </div>
 
-    <!-- Chat Container -->
-    <div id="chat-container">
-        <!-- Messages Section -->
-        <div id="messages"></div>
+        <!-- Chat Container -->
+        <div id="chat-container">
+            <!-- Messages Section -->
+            <div id="messages"></div>
 
-        <!-- User Input Section -->
-        <div id="user-input-container">
-            <input id="user-input" type="text" placeholder="How can we assist you today?" />
-            <button id="send-btn" onclick="sendMessage()">Send</button>
+            <!-- User Input Section -->
+            <div id="user-input-container">
+                <input id="user-input" type="text" placeholder="How can we assist you today?" />
+                <button id="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- Hidden Form Container -->
+        <div id="form-container" style="display: none;">
+            <form id="user-details-form">
+                <label for="full-name">Full Name</label>
+                <input id="full-name" type="text" placeholder="Your Full Name" required />
+                <label for="phone-number">Phone Number</label>
+                <input id="phone-number" type="tel" placeholder="Your Phone Number" required />
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
-
-    <!-- Hidden Form Container -->
-    <div id="form-container" style="display: none;">
-        <form id="user-details-form">
-            <label for="full-name">Full Name</label>
-            <input id="full-name" type="text" placeholder="Your Full Name" required />
-            <label for="phone-number">Phone Number</label>
-            <input id="phone-number" type="tel" placeholder="Your Phone Number" required />
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    
-</div>
 
     
     
@@ -814,7 +568,7 @@
                             <div class="icon color-1"><span class="flaticon-call"></span></div>
                             <div class="text">
                                 <p class="color-1" style="color: #2095AE;">Contact Us</p>
-                                <a class="color-1" href="tel:855-100-4444">+34 671 548 559</a>
+                                <a class="color-1" href="tel:855-100-4444">+34 692 688 348</a>
                             </div>
                         </div>
                     </div>
@@ -945,7 +699,7 @@
                                 <br>Spain
                             </p>
                             <div class="footer-contact-info">
-                                <p class="footer-contact-phone"><span class="flaticon-call"></span> + 34 671 548 559</p>
+                                <p class="footer-contact-phone"><span class="flaticon-call"></span> + 34 692 688 348</p>
                                 <p class="footer-contact-mail">info@justenjoyibiza.com</p>
                             </div>
                             <div class="footer-about-social-list"> <a href="#"><i class="ti-instagram"></i></a> <a href="https://www.youtube.com/channel/UCu3fhYvUuomFHK6bt47KoKQ"><i class="ti-youtube"></i></a> <a href="#"><i class="ti-facebook"></i></a> <a href="https://pin.it/5VtN3uG64"><i class="ti-pinterest"></i></a> </div>
@@ -956,71 +710,33 @@
         </div>  
     </footer>
 
-   <script src="/js/chatbot.js"></script>
-    <script>
-        
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault(); 
-    
-            const formData = new FormData(this); 
-    
-            fetch('https://usebasin.com/f/5bf7d9c6072f', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show the modal popup
-                    document.getElementById('thankYouModal').style.display = 'block';
-                    // Reset the form
-                    document.getElementById('contactForm').reset();
-                } else {
-                    alert('Something went wrong. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting the form.');
-            });
-        });
+<!-- jQuery First -->
+<script src="/js/jquery-3.6.3.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
 
-        function closeModal() {
-            document.getElementById('thankYouModal').style.display = 'none';
-        }
-    </script>
-    <script src="/js/jquery-3.6.3.min.js"></script>
-    <script src="/js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="/js/modernizr-2.6.2.min.js"></script>
-    <script src="/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/js/jquery.isotope.v3.0.2.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/scrollIt.min.js"></script>
-    <script src="/js/jquery.waypoints.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/jquery.stellar.min.js"></script>
-    <script src="/js/jquery.magnific-popup.js"></script>
-    <script src="/js/YouTubePopUp.js"></script>
-    <script src="/js/datepicker.js"></script>
-    <script src="/js/datepicker.js"></script>
-    <script src="/js/smooth-scroll.min.js"></script>
-    <script src="/js/custom.js"></script>
-    <script>
-    // JavaScript to handle compass interactivity for both desktop and mobile
-    document.querySelectorAll('.compass-icon').forEach(icon => {
-        const handleInteraction = () => {
-            const experienceLabel = icon.getAttribute('data-label');
-            document.getElementById('experience-subtitle').textContent = `Explore Ibiza with ${experienceLabel}`;
-            const ctaButton = document.getElementById('cta-button');
-            ctaButton.innerHTML = `<span>Book Your ${experienceLabel}</span>`;
-            ctaButton.classList.add('btn-book'); 
-        };
+<!-- Plugins -->
+<script src="/js/modernizr-2.6.2.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/jquery.isotope.v3.0.2.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/scrollIt.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.magnific-popup.js"></script>
+<script src="/js/YouTubePopUp.js"></script>
+<script src="/js/datepicker.js"></script>
+<script src="/js/smooth-scroll.min.js"></script>
+<script src="/js/select2.js"></script> <!-- Added Select2 -->
+<script src="/js/sticky-kit.min.js"></script>
+<script src="/js/vegas.slider.min.js"></script>
 
-        icon.addEventListener('mouseover', handleInteraction);
-        icon.addEventListener('touchstart', handleInteraction);
-    });
-    </script>
+<!-- Custom Scripts -->
+<script src="/js/chatbot.js"></script>
+<script src="/js/basinfrom.js"></script>
+<script src="/js/compass.js"></script>
+<script src="/js/custom.js"></script>
 
 </body>
 </html>
