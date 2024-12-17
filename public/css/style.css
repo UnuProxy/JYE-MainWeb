@@ -329,9 +329,16 @@ blockquote cite:before {
     width: 100%;
 }
 .bg-img {
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
 }
+.banner-header.full-height.section-padding.valign.bg-img.bg-fixed {
+    background-size: cover !important; /* Forcefully covers the container */
+    background-repeat: no-repeat !important; /* Stops repeating */
+    background-position: center !important; /* Centres the image */
+}
+
 
 .bg-position-top {
     background-position: top;
@@ -4370,7 +4377,7 @@ button.mfp-arrow {
     height: 30px;
     font-size: 15px;
     font-weight: normal;
-    color: #2095AE;;
+    color: #91765a;
     line-height: 30px;
     content: "\e61a";
     font-family: "Themify";
@@ -4378,7 +4385,7 @@ button.mfp-arrow {
 }
 .accordion-box .block .acc-btn.active {
     background-color: #fff;
-    color: #2095AE;;
+    color: #91765a;
 }
 .accordion-box .block .acc-btn.active:before {
   color: "Themify";
