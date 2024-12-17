@@ -328,6 +328,7 @@ blockquote cite:before {
 .full-width {
     width: 100%;
 }
+
 .bg-img {
     background-size: cover; /* Ensures the image covers the entire container */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -419,6 +420,18 @@ outline: none;
     border-color: #2095AE !important; 
 }
 
+.bg-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-fixed {
+    background-attachment: fixed;
+}
+
+.bg-position-center {
+    background-position: center center;
+}
 
 /* background & color */
 .bg-darkbrown {
