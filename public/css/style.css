@@ -1050,7 +1050,7 @@ color: #91765a;
 }
 
 .section-title {
-    color: #14100c;
+    color: #fff;
     font-size: 2.5rem;
     font-weight: 100;
     margin-bottom: 30px;
@@ -4473,7 +4473,7 @@ button.mfp-arrow {
     transition: all 500ms ease;
 }
 .accordion-box .block .acc-btn .count {
-  color: #91765a;
+  color: #2095AE;
   padding-right: 3px;
 }
 .accordion-box .block .acc-btn:before {
@@ -4483,7 +4483,7 @@ button.mfp-arrow {
     height: 30px;
     font-size: 15px;
     font-weight: normal;
-    color: #91765a;
+    color: #2095AE;
     line-height: 30px;
     content: "\e61a";
     font-family: "Themify";
@@ -4491,7 +4491,7 @@ button.mfp-arrow {
 }
 .accordion-box .block .acc-btn.active {
     background-color: #fff;
-    color: #91765a;
+    color: #2095AE;
 }
 .accordion-box .block .acc-btn.active:before {
   color: "Themify";
