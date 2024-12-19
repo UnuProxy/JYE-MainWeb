@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>Contact Us - Just Enjoy Ibiza</title>
+        <link rel="shortcut icon" href="img/favicon-16x16.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+        <link rel="stylesheet" href="/css/plugins.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    
+<body>
+    <!-- Preloader -->
+    <div class="preloader-bg"></div>
+    <div id="preloader">
+        <div id="preloader-status">
+            <div class="preloader-position loader"> <span></span> </div>
+        </div>
+    </div>
+    <!-- Progress scroll totop -->
+    <div class="progress-wrap cursor-pointer">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <a class="logo" href="index.html"> 
+                    <img src="img/WhiteLogo-Just-Enjoy.png" class="logo-img" alt="Just Enjoy Ibiza Logo"> 
+                </a>
+            </div>
+            <!-- Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"><i class="ti-menu"></i></span> 
+            </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav ms-auto">
+                    <!-- About Us -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About Us</a>
+                      </li>
+                      
+                    <!-- Our Services -->
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Services <i class="ti-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/yacht-rental.html" class="dropdown-item"><span>Yacht Rental</span></a></li>
+                            <li><a href="/boat-rental.html" class="dropdown-item"><span>Boat Rental</span></a></li>
+                            <li><a href="/boat-management.html" class="dropdown-item"><span>Boat Management</span></a></li>
+                            <li><a href="/corporate-ibiza.html" class="dropdown-item"><span>Corporate Events</span></a></li>
+                            <li><a href="/holiday-planner.html" class="dropdown-item"><span>Holiday Planner</span></a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Blog -->
+                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    
+                    <!-- Contact -->
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    
+                    <!-- Members -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="members.html">
+                            Members <i class="ti-user"></i> 
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header Banner -->
+    <div class="banner-header section-padding valign bg-img bg-fixed bg-position-bottom" data-overlay-dark="4" data-background="img/slider/main1.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center caption mt-90">
+                    <h1>Contact Us</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="contact section-padding">
+        <div class="container">
+            <div class="row mb-90">
+                <div class="col-lg-6 col-md-12 mb-60">
+                    <h3>Just Enjoy Ibiza</h3>
+                    <p>Welcome to Just Enjoy Ibiza, where we specialise in creating unforgettable yacht charters, luxury holidays, and corporate events in the heart of the Mediterranean. Reach out to us for personalised planning and exceptional experiences.</p>
+                    <div class="reservations mb-30">
+                        <div class="icon"><span class="flaticon-call"></span></div>
+                        <div class="text">
+                            <p>Phone</p> <a href="tel:+34600123456">+34 692 688 348</a>
+                        </div>
+                    </div>
+                    <div class="reservations mb-30">
+                        <div class="icon"><span class="flaticon-envelope"></span></div>
+                        <div class="text">
+                            <p>Email</p> <a href="mailto:info@justenjoyibiza.com">info@justenjoyibiza.com</a>
+                        </div>
+                    </div>
+                    <div class="reservations">
+                        <div class="icon"><span class="flaticon-location-pin"></span></div>
+                        <div class="text">
+                            <p>Address</p> Carrer de la Mar 123, 07800 Ibiza
+                            <br>Spain
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 col-md-12 mb-30">
+                    <h3>Get in Touch</h3>
+                    <form id="contactForm" class="contact__form">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <input name="name" type="text" placeholder="Full Name *" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input name="email" type="email" placeholder="Email Address *" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input name="phone" type="text" placeholder="Phone Number *" required>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input name="subject" type="text" placeholder="Subject *" required>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <textarea name="message" id="message" cols="30" rows="4" placeholder="Message *" required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="butn-dark2"><span>Send Message</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Map Section -->
+            <div class="row">
+                <div class="col-md-12 map animate-box" data-animate-effect="fadeInUp">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3029.2412433705773!2d1.4313723150665474!3d38.90673297957038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x129942a8d31f251d%3A0x949bdaf0f5d50780!2sIbiza!5e0!3m2!1sen!2ses!4v1680800000000!5m2!1sen!2ses" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal Popup -->
+    <div id="thankYouModal" class="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5); text-align:center;">
+        <p>Thank you for your request! We will be in touch with you soon.</p>
+        <button onclick="closeModal()">Close</button>
+    </div>
+    
+    
+   
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-column footer-about">
+                            <h3 class="footer-title">About Just Enjoy Ibiza</h3>
+                            <p class="footer-about-text">Welcome to Just Enjoy Ibiza! Let’s make your island dreams come true with luxury yacht adventures and unforgettable memories.</p>
+                            <div class="footer-language"> <i class="lni ti-world"></i>
+                                <select onchange="location = this.value;">
+                                    <option value="#">English</option>
+                                    <option value="#">German</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 offset-md-1">
+                        <div class="footer-column footer-explore clearfix">
+                            <h3 class="footer-title">Explore</h3>
+                            <ul class="footer-explore-list list-unstyled">
+                                <li><a href="/boat-management.html">Boat Management</a></li>
+                                <li><a href="/yacht-rental.html">Yachts Rental </a></li>
+                                <li><a href="/boat-rental.html">Boat Rental </a></li>
+                                <li><a href="/holiday-planner.html">Holiday Planner</a></li>
+                                <li><a href="/corporate-ibiza.html">Corporate</a></li>
+                                <li><a href="/about.html">About Us</a></li>
+                                <li><a href="/contact.html">Contact</a></li>
+                                <li><a href="/faq.html">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-column footer-contact">
+                            <h3 class="footer-title">Contact</h3>
+                            <p class="footer-contact-text">23 Puerto Botafoc, Ibiza, 07800
+                                <br>Spain
+                            </p>
+                            <div class="footer-contact-info">
+                                <p class="footer-contact-phone"><span class="flaticon-call"></span> + 34 692 688 348</p>
+                                <p class="footer-contact-mail">info@justenjoyibiza.com</p>
+                            </div>
+                            <div class="footer-about-social-list"> <a href="#"><i class="ti-instagram"></i></a> <a href="https://www.youtube.com/channel/UCu3fhYvUuomFHK6bt47KoKQ"><i class="ti-youtube"></i></a> <a href="#"><i class="ti-facebook"></i></a> <a href="https://pin.it/5VtN3uG64"><i class="ti-pinterest"></i></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </footer>
+    <!-- jQuery -->
+    <script src="/js/jquery-3.6.3.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.0.min.js"></script>
+    
+    <!-- Plugins -->
+    <script src="/js/modernizr-2.6.2.min.js"></script>
+    <script src="/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/js/jquery.isotope.v3.0.2.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/scrollIt.min.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/jquery.magnific-popup.js"></script>
+    <script src="/js/YouTubePopUp.js"></script>
+    <script src="/js/datepicker.js"></script>
+    <script src="/js/smooth-scroll.min.js"></script>
+    <script src="/js/select2.js"></script> <!-- Added Select2 -->
+    <script src="/js/sticky-kit.min.js"></script>
+    <script src="/js/vegas.slider.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="/js/chatbot.js"></script>
+    <script src="/js/basinfrom.js"></script>
+    <script src="/js/compass.js"></script>
+    <script src="/js/custom.js"></script>
+</body>
+
+</html>

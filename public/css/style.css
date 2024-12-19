@@ -5011,7 +5011,19 @@ position: absolute;
 	filter: grayscale(100%);
 	}
 
-
+    .contact__form input,
+    .contact__form textarea {
+        border: 1px solid #2095AE;
+        
+    }
+    
+    .contact__form input:focus,
+    .contact__form textarea:focus {
+        outline: none;
+        border-color: #2095AE;
+        box-shadow: 0 0 5px rgba(32, 149, 174, 0.5);
+    }
+    
 /* ======= Buttons style ======= */
 /* dark */
 .butn-dark {
@@ -5107,7 +5119,7 @@ position: absolute;
     position: relative;
     line-height: 1.2em;
     font-weight: 700;
-    background: #91765a;
+    background: #2095AE;
     color: #fff;
     padding: 15px 25px;
     margin: 0;
@@ -5124,8 +5136,8 @@ position: absolute;
     bottom: 0;
     left: 100%;
     z-index: 1;
-    background: #fff;
-    color: #14100c;
+    background: #1A3D5D;
+    color: #fff;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
@@ -5140,7 +5152,7 @@ position: absolute;
     transition: width 0.3s ease;
 }
 .butn-dark2:hover span {
-    color: #14100c;
+    color: #fff;
 }
 
 /* light2 */
@@ -5329,7 +5341,7 @@ position: absolute;
   padding: 20px 60px 20px 30px;
   height: 70px;
   display: block;
- font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 15px;
   background: #f4f4f4;
   color: #625c56;
