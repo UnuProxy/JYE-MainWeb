@@ -1019,6 +1019,7 @@ color: #91765a;
     text-decoration: none;  
 }
 
+
 /* CSS for the Heading (h5) */
 .con h5 {
     font-size: 18px;  
@@ -1664,9 +1665,9 @@ hr {
         /* Tooltip Styling */
         .compass-icon .tooltip {
             position: absolute;
-            bottom: -30px; /* Position below the icon */
-            background: rgba(0, 0, 0, 0.7); /* Dark background for readability */
-            color: #FFFFFF; /* White text */
+            bottom: -30px; 
+            background: rgba(0, 0, 0, 0.7); 
+            color: #FFFFFF; 
             font-size: 12px;
             padding: 5px 8px;
             border-radius: 5px;
@@ -3352,7 +3353,7 @@ hr {
     margin-bottom: 5px;
 }
 .services .content .info .tags {
-  color: #91765a;
+  color: #2095AE;
 }
 @media screen and (max-width: 991px) {
     .services .content .cont h4 {
@@ -3964,8 +3965,8 @@ button.mfp-arrow {
 }
 
 .ui-datepicker .ui-datepicker-header {
-    background: #91765a;
-    border: #91765a;
+    background: #2095AE;
+    border: #2095AE;
     color: #fff;
 }
 
@@ -3992,8 +3993,8 @@ button.mfp-arrow {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-    border: 1px solid #91765a;
-    background: #91765a;
+    border: 1px solid #2095AE;
+    background: #2095AE;
     font-weight: normal;
     color: #fff;
 }
@@ -4729,8 +4730,8 @@ button.mfp-arrow {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background: #1A3D5D;
-    border: 1px solid #91765a;
+    background: #2095AE;
+    border: 1px solid #2095AE;
     color: #fff;
     padding: 10px 12px;
     text-align: center;
@@ -4761,7 +4762,7 @@ display: block;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 2px;
-    color: #91765a;
+    color: #2095AE;
     font-family: 'Outfit', sans-serif;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -4773,7 +4774,7 @@ display: block;
     color: #14100c;
 }
 .news2 .post-cont h5 a:hover {
-    color: #91765a;
+    color: #2095AE;
 }
 .news2 .post-cont .date {
     font-family: 'Outfit', sans-serif;
@@ -4785,7 +4786,7 @@ display: block;
 	margin-bottom: 5px;
 }
 .news2 .post-cont .date a {
-    color: #91765a;
+    color: #2095AE;
 }
 .news2 .post-cont i {
     color: #ccc;
@@ -4816,7 +4817,7 @@ display: block;
     color: #91765a;
 }
 .news2-sidebar .widget ul li a:hover {
-    color: #91765a;
+    color: #2095AE;
 }
 .news2-sidebar .widget ul li:last-child {
     margin-bottom: 0;
@@ -4842,6 +4843,7 @@ display: block;
 .news2-sidebar .widget-title {
     margin-bottom: 15px;
 }
+
 .news2-sidebar .widget-title h6 {
     padding-bottom: 5px;
     border-bottom: 1px solid #f5eee7;
@@ -4850,6 +4852,7 @@ display: block;
     margin-bottom: 15px;
     color: #14100c;
 }
+
 .news2-sidebar .search form {
     position: relative;
 }
@@ -4884,7 +4887,7 @@ position: absolute;
 }
 .news2-sidebar ul.tags li:hover,
 .news2-sidebar ul.tags li:hover a {
-    background-color: #91765a;
+    background-color: #2095AE;
     color: #fff;
 }
 /* pagination */
@@ -4904,13 +4907,13 @@ position: absolute;
 .news-pagination-wrap li a:hover {
     opacity: 1;
     text-decoration: none;
-    background: #91765a;
-    border: 1px solid #91765a;
+    background: #2095AE;
+    border: 1px solid #2095AE;
     color: #fff;
 }
 .news-pagination-wrap li a.active {
-    background-color: #91765a;
-    border: 1px solid #91765a;
+    background-color: #2095AE;
+    border: 1px solid #2095AE;
     color: #fff;
 }
 .news .item .date span,
