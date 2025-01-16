@@ -7,10 +7,10 @@ async function initFirebase() {
 
         const firebaseConfig = await response.json();
 
-        // Initialise Firebase
+        
         firebase.initializeApp(firebaseConfig);
 
-        // Initialise Firestore
+        
         const db = firebase.firestore();
         window.db = db;
 
