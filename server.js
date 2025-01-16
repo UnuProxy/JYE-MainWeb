@@ -34,30 +34,28 @@ try {
     }
     
     try {
-        console.log('Attempting to decode base64 service account key');
-        const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
-        console.log('Successfully decoded base64. Attempting to parse JSON');
-        serviceAccount = JSON.parse(decoded);
-        console.log('Successfully parsed JSON');
-
-        // Fix private key formatting
-        if (serviceAccount.private_key) {
-            serviceAccount.private_key = serviceAccount.private_key
-                .replace(/\\n/g, '\n')
-                .replace(/"/g, '')
-                .replace(/\n\n/g, '\n');  // Remove any double line breaks
+        // For local development, try direct JSON parse first
+        serviceAccount = JSON.parse(rawKey);
+        console.log('Successfully parsed JSON directly');
+    } catch (firstError) {
+        // If direct parse fails, try base64 decode (for Vercel environment)
+        try {
+            console.log('Direct parse failed, attempting base64 decode');
+            const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
+            serviceAccount = JSON.parse(decoded);
+            console.log('Successfully decoded base64 and parsed JSON');
+        } catch (secondError) {
+            console.error('Both parsing attempts failed:', secondError.message);
+            throw secondError;
         }
-        
-        // Initialize Firebase
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-        });
-        console.log('Firebase initialized successfully');
-        
-    } catch (parseError) {
-        console.error('Parsing error:', parseError.message);
-        throw parseError;
     }
+
+    // Initialize Firebase
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+    });
+    console.log('Firebase initialized successfully');
+    
 } catch (error) {
     console.error('Firebase initialization error:', error.message);
     console.error('Service account key format:', typeof process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
