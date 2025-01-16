@@ -1,32 +1,37 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const agentNameElement = document.getElementById('agent-name'); 
-    const agentPhoto = document.getElementById('agent-photo');      
+    const agentNameElement = document.getElementById('agent-name');
+    const agentPhoto = document.getElementById('agent-photo');
+    const messagesContainer = document.getElementById('messages');
+    const userInputField = document.getElementById('user-input');
+    const formContainer = document.getElementById('form-container');
     const BASE_API_URL = window.location.origin;
 
-     
-
-    // Initialize Firebase
-    await initFirebase();
-    if (!window.db) {
-        console.error('Firestore is not initialized. Check your Firebase configuration.');
-        return;
-    }
-    await firebase.auth().signInAnonymously()
-    .then(() => {
-        console.log("Anonymous authentication successful.");
-    })
-    .catch((error) => {
-        console.error("Anonymous authentication failed:", error.code, error.message);
-        return; 
-    });
-
     let conversationId = localStorage.getItem('conversationId');
+    let formDisplayed = false;
+    let userDetailsSubmitted = false;
+
     if (!conversationId) {
         conversationId = `conv_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
         localStorage.setItem('conversationId', conversationId);
     }
 
-    
+    // Ensure Firebase is initialised
+    if (!window.db) {
+        console.error('Firestore is not initialised. Ensure your Firebase configuration is correctly set.');
+        return;
+    }
+
+    try {
+        await firebase.auth().signInAnonymously();
+        console.log("Anonymous authentication successful.");
+    } catch (error) {
+        console.error("Anonymous authentication failed:", error.code, error.message);
+        return;
+    }
+
+    /**
+     * Set dynamic agent name and photo based on time.
+     */
     function setDynamicAgentName() {
         const currentHour = new Date().getHours();
         let agentName = "Just Enjoy Ibiza Assistant";
@@ -40,23 +45,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             photoSrc = "img/team/alin.png";
         }
 
-        // Update the DOM with the dynamic name and photo
         if (agentNameElement) agentNameElement.textContent = agentName;
         if (agentPhoto) agentPhoto.src = photoSrc;
     }
 
-    // Call the function to update name and photo dynamically
     setDynamicAgentName();
 
-    const messagesContainer = document.getElementById('messages');
-    const userInputField = document.getElementById('user-input');
-    const formContainer = document.getElementById('form-container');
-
-    let formDisplayed = false; // Prevent multiple form displays
-    let userDetailsSubmitted = false; // Ensure user details are saved only once
-
     /**
-     * Append a message to the chat and save it to Firestore.
+     * Append a message to the chat window and optionally display a form.
      */
     async function appendMessage(sender, message, isForm = false) {
         const messageClass = sender === 'user' ? 'user' : 'bot';
@@ -87,7 +83,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-        // Save message to Firestore
         await saveMessageToFirestore(sender, message);
     }
 
@@ -109,16 +104,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error saving message to Firestore:', error);
         }
     }
-    
 
     /**
-     * Handle user input and send message to ChatGPT.
+     * Send user input to the chatbot and handle the response.
      */
     window.sendMessage = async () => {
         const userInput = userInputField.value.trim();
         if (!userInput) return;
 
-        // Append user's message and save to Firestore
         appendMessage('user', userInput);
         userInputField.value = '';
 
@@ -135,7 +128,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 );
             }, 1500);
         } else {
-            // Fetch response from ChatGPT backend
             appendMessage('bot', "Let me check that for you...");
             const botResponse = await fetchChatGPTResponse(userInput);
             appendMessage('bot', botResponse);
@@ -143,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     /**
-     * Fetch ChatGPT response from the backend.
+     * Fetch the response from ChatGPT API via the backend.
      */
     async function fetchChatGPTResponse(userMessage) {
         try {
@@ -179,11 +171,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        // Save user details and reset form
         fetch(`${BASE_API_URL}/save-details`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fullName, phoneNumber, conversationId }),
+            body: JSON.stringify({ fullName, phoneNumber }),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -203,20 +194,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
+     * Toggle chatbot visibility.
+     */
+    window.toggleChat = () => {
+        const widget = document.getElementById('chatbot-widget');
+        widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
+    };
+
+    /**
      * Close chatbot widget.
      */
     window.closeChat = (event) => {
         event.stopPropagation();
         const widget = document.getElementById('chatbot-widget');
         widget.style.display = 'none';
-    };
-
-    /**
-     * Toggle chatbot visibility.
-     */
-    window.toggleChat = () => {
-        const widget = document.getElementById('chatbot-widget');
-        widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
     };
 });
 
