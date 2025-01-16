@@ -33,7 +33,7 @@ admin.initializeApp({
 });
 const db = admin.firestore(); 
 
-// Middleware
+
 const allowedOrigins = ['http://localhost:3000', 'https://your-production-url.com'];
 app.use(cors({
     origin: (origin, callback) => {
