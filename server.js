@@ -28,38 +28,28 @@ requiredEnvVars.forEach((key) => {
 
 let serviceAccount;
 try {
-    const rawKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-    if (!rawKey) {
-        throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY is undefined');
-    }
-    
-    try {
-        // Try direct JSON parse first
-        serviceAccount = JSON.parse(rawKey);
-        console.log('Successfully parsed JSON directly');
-    } catch (firstError) {
-        // If direct parse fails, try base64 decode
-        try {
-            console.log('Direct parse failed, attempting base64 decode');
-            const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
-            serviceAccount = JSON.parse(decoded);
-            console.log('Successfully decoded base64 and parsed JSON');
-        } catch (secondError) {
-            console.error('Both parsing attempts failed:', secondError.message);
-            throw secondError;
-        }
-    }
+    // Construct service account object from individual env vars
+    serviceAccount = {
+        type: process.env.FIREBASE_ADMIN_TYPE,
+        project_id: process.env.FIREBASE_ADMIN_PROJECT_ID,
+        private_key_id: process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID,
+        private_key: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        client_email: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
+        client_id: process.env.FIREBASE_ADMIN_CLIENT_ID,
+        auth_uri: process.env.FIREBASE_ADMIN_AUTH_URI,
+        token_uri: process.env.FIREBASE_ADMIN_TOKEN_URI,
+        auth_provider_x509_cert_url: process.env.FIREBASE_ADMIN_AUTH_PROVIDER_CERT_URL,
+        client_x509_cert_url: process.env.FIREBASE_ADMIN_CLIENT_CERT_URL
+    };
 
-    // Initialize Firebase
     admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
+        credential: admin.credential.cert(serviceAccount)
     });
-    console.log('Firebase initialized successfully');
-    
+    console.log('Firebase Admin initialized successfully');
 } catch (error) {
-    console.error('Firebase initialization error:', error.message);
-    console.error('Service account key format:', typeof process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-    console.error('Raw key length:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.length);
+    console.error('Firebase Admin initialization error:', error);
+    console.error('Project ID:', process.env.FIREBASE_ADMIN_PROJECT_ID);
+    console.error('Client Email:', process.env.FIREBASE_ADMIN_CLIENT_EMAIL);
     process.exit(1);
 }
 
