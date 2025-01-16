@@ -28,19 +28,21 @@ requiredEnvVars.forEach((key) => {
 
 let serviceAccount;
 try {
-    // First attempt: Try parsing with newline handling
+    // Decode base64 and parse JSON
     const rawKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
     if (!rawKey) {
         throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY is undefined');
     }
     
-    // Handle potential double-escaped newlines and normalize the string
-    const normalizedKey = rawKey
-        .replace(/\\n/g, '\n')
-        .replace(/"\n"/g, '\n')
-        .replace(/\\"/g, '"');
-    
-    serviceAccount = JSON.parse(normalizedKey);
+    // First try to decode base64
+    try {
+        const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
+        serviceAccount = JSON.parse(decoded);
+    } catch (base64Error) {
+        // If base64 decode fails, try direct JSON parse as fallback
+        console.log('Base64 decode failed, trying direct JSON parse');
+        serviceAccount = JSON.parse(rawKey);
+    }
     
     // Validate the required fields
     if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
@@ -56,6 +58,7 @@ try {
 } catch (error) {
     console.error('Firebase initialization error:', error.message);
     console.error('Service account key format:', typeof process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+    console.error('Key starts with:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY.slice(0, 50));
     process.exit(1);
 }
 
@@ -64,7 +67,8 @@ const db = admin.firestore();
 const allowedOrigins = [
     'http://localhost:3000', 
     'https://jye-main-web.vercel.app',
-    'https://jye-main-1skc9fjoo-julians-projects-41433483.vercel.app'
+    'https://jye-main-1skc9fjoo-julians-projects-41433483.vercel.app',
+    'https://jye-main-3gkbudtlw-julians-projects-41433483.vercel.app'
 ];
 
 app.use(cors({
