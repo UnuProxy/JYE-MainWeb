@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Validate environment variables
+
 const requiredEnvVars = [
     'OPENAI_API_KEY',
     'GOOGLE_SHEET_URL',
