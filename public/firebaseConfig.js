@@ -1,26 +1,33 @@
 async function initFirebase() {
     try {
+        // Fetch Firebase configuration from your backend endpoint
         const response = await fetch('/get-firebase-config');
         if (!response.ok) {
-            throw new Error(`Failed to fetch Firebase config: ${response.status}`);
+            throw new Error(`Failed to fetch Firebase config: HTTP ${response.status} - ${response.statusText}`);
         }
 
         const firebaseConfig = await response.json();
 
-        
-        firebase.initializeApp(firebaseConfig);
+        // Check if Firebase has already been initialized
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
 
-        
-        const db = firebase.firestore();
-        window.db = db;
+            // Initialize Firestore
+            const db = firebase.firestore();
+            window.db = db;
 
-        console.log('Firebase initialized successfully');
+            console.log('Firebase initialized successfully');
+        } else {
+            console.warn('Firebase is already initialized.');
+        }
     } catch (error) {
-        console.error('Error initializing Firebase:', error);
+        console.error('Error initializing Firebase:', error.message);
     }
 }
 
+// Make the initFirebase function accessible globally
 window.initFirebase = initFirebase;
+
 
 
 
