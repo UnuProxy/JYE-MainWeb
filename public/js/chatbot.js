@@ -15,23 +15,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.setItem('conversationId', conversationId);
     }
 
-    // Ensure Firebase is initialised
-    if (!window.db) {
-        console.error('Firestore is not initialised. Ensure your Firebase configuration is correctly set.');
-        return;
-    }
-
+    // Initialise Firebase
     try {
+        await initFirebase();
+        if (!window.db) {
+            console.error('Firestore is not initialised. Check your Firebase configuration.');
+            return;
+        }
+
         await firebase.auth().signInAnonymously();
         console.log("Anonymous authentication successful.");
     } catch (error) {
-        console.error("Anonymous authentication failed:", error.code, error.message);
+        console.error("Error during Firebase initialization or authentication:", error.message);
         return;
     }
 
-    /**
-     * Set dynamic agent name and photo based on time.
-     */
     function setDynamicAgentName() {
         const currentHour = new Date().getHours();
         let agentName = "Just Enjoy Ibiza Assistant";
@@ -51,9 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     setDynamicAgentName();
 
-    /**
-     * Append a message to the chat window and optionally display a form.
-     */
     async function appendMessage(sender, message, isForm = false) {
         const messageClass = sender === 'user' ? 'user' : 'bot';
 
@@ -86,9 +81,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await saveMessageToFirestore(sender, message);
     }
 
-    /**
-     * Save a message to Firestore.
-     */
     async function saveMessageToFirestore(sender, message) {
         try {
             await window.db
@@ -105,9 +97,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    /**
-     * Send user input to the chatbot and handle the response.
-     */
     window.sendMessage = async () => {
         const userInput = userInputField.value.trim();
         if (!userInput) return;
@@ -134,9 +123,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    /**
-     * Fetch the response from ChatGPT API via the backend.
-     */
     async function fetchChatGPTResponse(userMessage) {
         try {
             const response = await fetch(`${BASE_API_URL}/chat`, {
@@ -157,9 +143,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    /**
-     * Handle form submission to save user details.
-     */
     function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -193,20 +176,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
     }
 
-    /**
-     * Toggle chatbot visibility.
-     */
     window.toggleChat = () => {
         const widget = document.getElementById('chatbot-widget');
         widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
     };
-    
+
     window.closeChat = (event) => {
         event.stopPropagation();
         const widget = document.getElementById('chatbot-widget');
         widget.style.display = 'none';
     };
-    
 });
+
 
 
