@@ -16,9 +16,9 @@ const db = admin.firestore(); // Initialize Firestore
 
 // Middleware
 app.use(cors());
-app.use(express.json()); // Parse JSON bodies
+app.use(express.json()); 
 
-// Serve Static Files from 'public' Directory
+
 app.use(express.static('public'));
 
 // Root Route to Serve index.html
