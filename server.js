@@ -7,26 +7,58 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Validate environment variables
+const requiredEnvVars = [
+    'OPENAI_API_KEY',
+    'GOOGLE_SHEET_URL',
+    'FIREBASE_API_KEY',
+    'FIREBASE_AUTH_DOMAIN',
+    'FIREBASE_PROJECT_ID',
+    'FIREBASE_STORAGE_BUCKET',
+    'FIREBASE_MESSAGING_SENDER_ID',
+    'FIREBASE_APP_ID',
+    'FIREBASE_SERVICE_ACCOUNT_KEY'
+];
+
+requiredEnvVars.forEach((key) => {
+    if (!process.env[key]) {
+        console.error(`Environment variable ${key} is missing.`);
+        process.exit(1);
+    }
+});
+
 // Firebase Admin Initialization
-const serviceAccount = require('./serviceAccountKey.json'); // Path to your Firebase Admin SDK key
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
 const db = admin.firestore(); // Initialize Firestore
 
 // Middleware
-app.use(cors());
-app.use(express.json()); 
-
-
+const allowedOrigins = ['http://localhost:3000', 'https://your-production-url.com'];
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
+app.use(express.json());
 app.use(express.static('public'));
 
-// Root Route to Serve index.html
+// Root Route
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    try {
+        res.sendFile(__dirname + '/public/index.html');
+    } catch (error) {
+        console.error('Error serving index.html:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-// Endpoint to get ChatGPT response
+// Chat Endpoint
 app.post('/chat', async (req, res) => {
     const { userMessage, conversationId } = req.body;
 
@@ -53,9 +85,13 @@ app.post('/chat', async (req, res) => {
         });
 
         const data = await response.json();
+        if (!response.ok || !data.choices || !data.choices.length) {
+            console.error('OpenAI API Error:', data);
+            throw new Error('Failed to fetch a valid response from OpenAI API.');
+        }
         const botResponse = data.choices[0].message.content;
 
-        // Save user message and bot response to Firestore
+        // Save messages to Firestore
         const conversationDoc = db.collection('chatConversations').doc(conversationId);
         await conversationDoc.collection('messages').add({
             role: 'user',
@@ -75,6 +111,7 @@ app.post('/chat', async (req, res) => {
     }
 });
 
+// Firebase Config Endpoint
 app.get('/get-firebase-config', (req, res) => {
     res.json({
         apiKey: process.env.FIREBASE_API_KEY,
@@ -86,12 +123,7 @@ app.get('/get-firebase-config', (req, res) => {
     });
 });
 
-// Catch-All Route for Serving index.html (Handles SPA Navigation)
-app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
-});
-
-// Endpoint to save user details to Google Sheets
+// Save User Details Endpoint (Google Sheets)
 app.post('/save-details', async (req, res) => {
     const { fullName, phoneNumber } = req.body;
 
@@ -113,14 +145,20 @@ app.post('/save-details', async (req, res) => {
     }
 });
 
-// Catch-All Route for Serving index.html (Handles SPA Navigation)
+// Catch-All Route
 app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    try {
+        res.sendFile(__dirname + '/public/index.html');
+    } catch (error) {
+        console.error('Error serving index.html:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-// Start the server
+// Start the Server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on ${process.env.NODE_ENV === 'production' ? 'production' : 'localhost'}:${PORT}`);
 });
+
 
 
