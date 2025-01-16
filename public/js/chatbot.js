@@ -200,15 +200,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         const widget = document.getElementById('chatbot-widget');
         widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
     };
-
-    /**
-     * Close chatbot widget.
-     */
+    
     window.closeChat = (event) => {
         event.stopPropagation();
         const widget = document.getElementById('chatbot-widget');
         widget.style.display = 'none';
     };
+    
 });
 
 
