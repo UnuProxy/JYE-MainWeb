@@ -37,17 +37,60 @@ try {
         // For local development, try direct JSON parse first
         serviceAccount = JSON.parse(rawKey);
         console.log('Successfully parsed JSON directly');
+        
+        // Format the private key properly
+        if (serviceAccount.private_key) {
+            serviceAccount.private_key = serviceAccount.private_key
+                .replace(/\\n/g, '\n')  // Replace literal \n with newlines
+                .replace(/"/g, '')      // Remove any quotes
+                .trim();                // Remove extra whitespace
+                
+            // Ensure proper PEM format
+            if (!serviceAccount.private_key.includes('-----BEGIN PRIVATE KEY-----')) {
+                serviceAccount.private_key = '-----BEGIN PRIVATE KEY-----\n' + serviceAccount.private_key;
+            }
+            if (!serviceAccount.private_key.includes('-----END PRIVATE KEY-----')) {
+                serviceAccount.private_key = serviceAccount.private_key + '\n-----END PRIVATE KEY-----';
+            }
+            
+            console.log('Private key formatted');
+        }
     } catch (firstError) {
         // If direct parse fails, try base64 decode (for Vercel environment)
         try {
             console.log('Direct parse failed, attempting base64 decode');
             const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
             serviceAccount = JSON.parse(decoded);
+            
+            // Format the private key properly
+            if (serviceAccount.private_key) {
+                serviceAccount.private_key = serviceAccount.private_key
+                    .replace(/\\n/g, '\n')  // Replace literal \n with newlines
+                    .replace(/"/g, '')      // Remove any quotes
+                    .trim();                // Remove extra whitespace
+                    
+                // Ensure proper PEM format
+                if (!serviceAccount.private_key.includes('-----BEGIN PRIVATE KEY-----')) {
+                    serviceAccount.private_key = '-----BEGIN PRIVATE KEY-----\n' + serviceAccount.private_key;
+                }
+                if (!serviceAccount.private_key.includes('-----END PRIVATE KEY-----')) {
+                    serviceAccount.private_key = serviceAccount.private_key + '\n-----END PRIVATE KEY-----';
+                }
+                
+                console.log('Private key formatted');
+            }
             console.log('Successfully decoded base64 and parsed JSON');
         } catch (secondError) {
             console.error('Both parsing attempts failed:', secondError.message);
             throw secondError;
         }
+    }
+
+    // Log the structure of the service account (safely)
+    console.log('Service account fields:', Object.keys(serviceAccount));
+    if (serviceAccount.private_key) {
+        console.log('Private key starts with:', serviceAccount.private_key.substring(0, 27));
+        console.log('Private key ends with:', serviceAccount.private_key.slice(-25));
     }
 
     // Initialize Firebase
