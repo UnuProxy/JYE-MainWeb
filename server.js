@@ -36,17 +36,29 @@ try {
     
     // First try to decode base64
     try {
+        // Add additional logging
+        console.log('Attempting to decode base64 service account key');
         const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
+        console.log('Successfully decoded base64. Attempting to parse JSON');
         serviceAccount = JSON.parse(decoded);
+        console.log('Successfully parsed JSON');
     } catch (base64Error) {
-        // If base64 decode fails, try direct JSON parse as fallback
-        console.log('Base64 decode failed, trying direct JSON parse');
+        console.error('Base64 decode/parse failed:', base64Error);
+        // Try direct JSON parse as fallback
+        console.log('Attempting direct JSON parse');
         serviceAccount = JSON.parse(rawKey);
     }
     
+    // Add detailed validation logging
+    console.log('Validating service account fields...');
+    if (!serviceAccount.type) console.error('Missing type field');
+    if (!serviceAccount.project_id) console.error('Missing project_id field');
+    if (!serviceAccount.private_key) console.error('Missing private_key field');
+    if (!serviceAccount.client_email) console.error('Missing client_email field');
+
     // Validate the required fields
     if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
-        throw new Error('Invalid service account format');
+        throw new Error('Invalid service account format - missing required fields');
     }
     
     // Initialize Firebase
@@ -58,7 +70,8 @@ try {
 } catch (error) {
     console.error('Firebase initialization error:', error.message);
     console.error('Service account key format:', typeof process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-    console.error('Key starts with:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY.slice(0, 50));
+    console.error('Raw key length:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.length);
+    console.error('Key starts with:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.slice(0, 50));
     process.exit(1);
 }
 
@@ -68,7 +81,8 @@ const allowedOrigins = [
     'http://localhost:3000', 
     'https://jye-main-web.vercel.app',
     'https://jye-main-1skc9fjoo-julians-projects-41433483.vercel.app',
-    'https://jye-main-3gkbudtlw-julians-projects-41433483.vercel.app'
+    'https://jye-main-3gkbudtlw-julians-projects-41433483.vercel.app',
+    'https://jye-main-pmab1hdy0-julians-projects-41433483.vercel.app'
 ];
 
 app.use(cors({
