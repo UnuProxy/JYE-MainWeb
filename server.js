@@ -28,50 +28,55 @@ requiredEnvVars.forEach((key) => {
 
 let serviceAccount;
 try {
-    // Decode base64 and parse JSON
     const rawKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
     if (!rawKey) {
         throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY is undefined');
     }
     
-    // First try to decode base64
     try {
-        // Add additional logging
         console.log('Attempting to decode base64 service account key');
         const decoded = Buffer.from(rawKey, 'base64').toString('utf8');
         console.log('Successfully decoded base64. Attempting to parse JSON');
         serviceAccount = JSON.parse(decoded);
         console.log('Successfully parsed JSON');
-    } catch (base64Error) {
-        console.error('Base64 decode/parse failed:', base64Error);
-        // Try direct JSON parse as fallback
-        console.log('Attempting direct JSON parse');
-        serviceAccount = JSON.parse(rawKey);
-    }
-    
-    // Add detailed validation logging
-    console.log('Validating service account fields...');
-    if (!serviceAccount.type) console.error('Missing type field');
-    if (!serviceAccount.project_id) console.error('Missing project_id field');
-    if (!serviceAccount.private_key) console.error('Missing private_key field');
-    if (!serviceAccount.client_email) console.error('Missing client_email field');
+        
+        // Add detailed object inspection
+        console.log('Service account object keys:', Object.keys(serviceAccount));
+        console.log('client_email present:', !!serviceAccount.client_email);
+        console.log('private_key present:', !!serviceAccount.private_key);
+        console.log('project_id present:', !!serviceAccount.project_id);
+        
+        if (!serviceAccount.type) console.error('Missing type field');
+        if (!serviceAccount.project_id) console.error('Missing project_id field');
+        if (!serviceAccount.private_key) console.error('Missing private_key field');
+        if (!serviceAccount.client_email) console.error('Missing client_email field');
 
-    // Validate the required fields
-    if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
-        throw new Error('Invalid service account format - missing required fields');
+        // Log first few characters of important fields (safely)
+        if (serviceAccount.client_email) {
+            console.log('client_email starts with:', serviceAccount.client_email.substring(0, 10));
+        }
+        if (serviceAccount.private_key) {
+            console.log('private_key starts with:', serviceAccount.private_key.substring(0, 20));
+        }
+
+        if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
+            throw new Error('Invalid service account format - missing required fields');
+        }
+
+        // Initialize Firebase
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+        });
+        console.log('Firebase initialized successfully');
+        
+    } catch (parseError) {
+        console.error('Parsing error:', parseError.message);
+        throw parseError;
     }
-    
-    // Initialize Firebase
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-    });
-    console.log('Firebase initialized successfully');
-    
 } catch (error) {
     console.error('Firebase initialization error:', error.message);
     console.error('Service account key format:', typeof process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
     console.error('Raw key length:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.length);
-    console.error('Key starts with:', process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.slice(0, 50));
     process.exit(1);
 }
 
