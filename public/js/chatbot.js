@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const agentNameElement = document.getElementById('agent-name'); // Dynamic name field
-    const agentPhoto = document.getElementById('agent-photo');      // Dynamic photo
+    const agentNameElement = document.getElementById('agent-name'); 
+    const agentPhoto = document.getElementById('agent-photo');      
     const BASE_API_URL = window.location.origin;
 
      
@@ -17,10 +17,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
     .catch((error) => {
         console.error("Anonymous authentication failed:", error.code, error.message);
-        return; // Exit if authentication fails
+        return; 
     });
 
-    // Set up conversation ID
     let conversationId = localStorage.getItem('conversationId');
     if (!conversationId) {
         conversationId = `conv_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
