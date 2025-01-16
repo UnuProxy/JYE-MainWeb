@@ -7,7 +7,6 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
 const requiredEnvVars = [
     'OPENAI_API_KEY',
     'GOOGLE_SHEET_URL',
@@ -27,14 +26,47 @@ requiredEnvVars.forEach((key) => {
     }
 });
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-});
-const db = admin.firestore(); 
+let serviceAccount;
+try {
+    // First attempt: Try parsing with newline handling
+    const rawKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    if (!rawKey) {
+        throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY is undefined');
+    }
+    
+    // Handle potential double-escaped newlines and normalize the string
+    const normalizedKey = rawKey
+        .replace(/\\n/g, '\n')
+        .replace(/"\n"/g, '\n')
+        .replace(/\\"/g, '"');
+    
+    serviceAccount = JSON.parse(normalizedKey);
+    
+    // Validate the required fields
+    if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
+        throw new Error('Invalid service account format');
+    }
+    
+    // Initialize Firebase
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+    });
+    console.log('Firebase initialized successfully');
+    
+} catch (error) {
+    console.error('Firebase initialization error:', error.message);
+    console.error('Service account key format:', typeof process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+    process.exit(1);
+}
 
+const db = admin.firestore();
 
-const allowedOrigins = ['http://localhost:3000', 'https://your-production-url.com'];
+const allowedOrigins = [
+    'http://localhost:3000', 
+    'https://jye-main-web.vercel.app',
+    'https://jye-main-1skc9fjoo-julians-projects-41433483.vercel.app'
+];
+
 app.use(cors({
     origin: (origin, callback) => {
         if (!origin || allowedOrigins.includes(origin)) {
@@ -44,6 +76,7 @@ app.use(cors({
         }
     }
 }));
+
 app.use(express.json());
 app.use(express.static('public'));
 
@@ -158,6 +191,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on ${process.env.NODE_ENV === 'production' ? 'production' : 'localhost'}:${PORT}`);
 });
-
 
 
