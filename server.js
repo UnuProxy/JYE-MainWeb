@@ -39,30 +39,15 @@ try {
         console.log('Successfully decoded base64. Attempting to parse JSON');
         serviceAccount = JSON.parse(decoded);
         console.log('Successfully parsed JSON');
-        
-        // Add detailed object inspection
-        console.log('Service account object keys:', Object.keys(serviceAccount));
-        console.log('client_email present:', !!serviceAccount.client_email);
-        console.log('private_key present:', !!serviceAccount.private_key);
-        console.log('project_id present:', !!serviceAccount.project_id);
-        
-        if (!serviceAccount.type) console.error('Missing type field');
-        if (!serviceAccount.project_id) console.error('Missing project_id field');
-        if (!serviceAccount.private_key) console.error('Missing private_key field');
-        if (!serviceAccount.client_email) console.error('Missing client_email field');
 
-        // Log first few characters of important fields (safely)
-        if (serviceAccount.client_email) {
-            console.log('client_email starts with:', serviceAccount.client_email.substring(0, 10));
-        }
+        // Fix private key formatting
         if (serviceAccount.private_key) {
-            console.log('private_key starts with:', serviceAccount.private_key.substring(0, 20));
+            serviceAccount.private_key = serviceAccount.private_key
+                .replace(/\\n/g, '\n')
+                .replace(/"/g, '')
+                .replace(/\n\n/g, '\n');  // Remove any double line breaks
         }
-
-        if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
-            throw new Error('Invalid service account format - missing required fields');
-        }
-
+        
         // Initialize Firebase
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
