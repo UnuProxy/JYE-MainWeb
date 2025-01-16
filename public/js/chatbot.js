@@ -26,9 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.setItem('conversationId', conversationId);
     }
 
-    /**
-     * Set dynamic agent name and photo based on time of day.
-     */
+    
     function setDynamicAgentName() {
         const currentHour = new Date().getHours();
         let agentName = "Just Enjoy Ibiza Assistant";
