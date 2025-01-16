@@ -7,6 +7,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// List of required environment variables
 const requiredEnvVars = [
     'OPENAI_API_KEY',
     'GOOGLE_SHEET_URL',
@@ -19,6 +20,7 @@ const requiredEnvVars = [
     'FIREBASE_SERVICE_ACCOUNT_KEY'
 ];
 
+// Ensure all required environment variables are set
 requiredEnvVars.forEach((key) => {
     if (!process.env[key]) {
         console.error(`Environment variable ${key} is missing.`);
@@ -26,65 +28,33 @@ requiredEnvVars.forEach((key) => {
     }
 });
 
+// Firebase Admin initialization
 let serviceAccount;
 try {
-    const missingVars = [];
-    [
-        'FIREBASE_ADMIN_TYPE',
-        'FIREBASE_ADMIN_PROJECT_ID',
-        'FIREBASE_ADMIN_PRIVATE_KEY_ID',
-        'FIREBASE_ADMIN_PRIVATE_KEY',
-        'FIREBASE_ADMIN_CLIENT_EMAIL',
-        'FIREBASE_ADMIN_CLIENT_ID',
-        'FIREBASE_ADMIN_AUTH_URI',
-        'FIREBASE_ADMIN_TOKEN_URI',
-        'FIREBASE_ADMIN_AUTH_PROVIDER_CERT_URL',
-        'FIREBASE_ADMIN_CLIENT_CERT_URL'
-    ].forEach(varName => {
-        if (!process.env[varName]) {
-            missingVars.push(varName);
-        }
-    });
-
-    if (missingVars.length > 0) {
-        throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`);
-    }
-
-    serviceAccount = {
-        type: process.env.FIREBASE_ADMIN_TYPE,
-        project_id: process.env.FIREBASE_ADMIN_PROJECT_ID,
-        private_key_id: process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID,
-        private_key: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-        client_email: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-        client_id: process.env.FIREBASE_ADMIN_CLIENT_ID,
-        auth_uri: process.env.FIREBASE_ADMIN_AUTH_URI,
-        token_uri: process.env.FIREBASE_ADMIN_TOKEN_URI,
-        auth_provider_x509_cert_url: process.env.FIREBASE_ADMIN_AUTH_PROVIDER_CERT_URL,
-        client_x509_cert_url: process.env.FIREBASE_ADMIN_CLIENT_CERT_URL
-    };
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
     admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`,
     });
+
     console.log('Firebase Admin initialized successfully');
 } catch (error) {
-    console.error('Firebase Admin initialization error:', error.message);
+    console.error('Error initializing Firebase Admin SDK:', error.message);
     process.exit(1);
 }
 
 const db = admin.firestore();
 
+// CORS Configuration
 const allowedOrigins = [
-    'http://localhost:3000', 
-    'https://jye-main-web.vercel.app',
-    'https://jye-main-1skc9fjoo-julians-projects-41433483.vercel.app',
-    'https://jye-main-3gkbudtlw-julians-projects-41433483.vercel.app',
-    'https://jye-main-pmab1hdy0-julians-projects-41433483.vercel.app'
+    'http://localhost:3000',
+    /\.vercel\.app$/ // Allow all Vercel subdomains
 ];
 
 app.use(cors({
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || allowedOrigins.some(o => o instanceof RegExp ? o.test(origin) : o === origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
@@ -139,7 +109,7 @@ app.post('/chat', async (req, res) => {
         const botResponse = data.choices[0].message.content;
 
         // Save messages to Firestore
-        const conversationDoc = db.collection('chatConversations').doc(conversationId);
+        const conversationDoc = db.collection('chatConversations').doc(conversationId || 'default');
         await conversationDoc.collection('messages').add({
             role: 'user',
             content: userMessage,
@@ -206,5 +176,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on ${process.env.NODE_ENV === 'production' ? 'production' : 'localhost'}:${PORT}`);
 });
-
 
