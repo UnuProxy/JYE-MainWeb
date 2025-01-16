@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Ibiza Getaway</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/public/css/user.css">
+</head>
+<body>
+  <!-- Hero Banner -->
+  <header class="hero-banner">
+    <video autoplay muted loop class="background-video">
+      <source src="/public/video/space_boat_experience_corto.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>Welcome Back, <span id="client-name">John Doe</span>!</h1>
+      <p>Your luxury Ibiza adventure awaits.</p>
+    </div>
+  </header>
+
+  <!-- Upcoming Booking Section -->
+  <section id="upcoming-booking" class="fade-in">
+    <h2><i class="fas fa-calendar-alt"></i> Your Upcoming Booking</h2>
+    <div class="booking-card">
+      <h3><i class="fas fa-ship"></i> Luxury Yacht Charter</h3>
+      <p><strong>Dates:</strong> 20th Dec - 21st Dec</p>
+      <p><strong>Guests:</strong> 4</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 50%;"></div>
+      </div>
+      <button class="details-btn"><i class="fas fa-info-circle"></i> View Details</button>
+    </div>
+    <button id="view-all-bookings"><i class="fas fa-list"></i> View All Bookings</button>
+  </section>
+
+  <!-- Things to Do Section -->
+  <section id="things-to-do" class="fade-in">
+    <h2><i class="fas fa-map-marked-alt"></i> Things to Do</h2>
+    <div class="cards-container">
+      <div class="card">
+        <div class="card-image">
+          <img src="img/experience/6285021-casa-amalia-ibiza-spain.jpg" alt="Explore Villas">
+          <div class="overlay">
+            <p>Explore luxury villas and stay in style.</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <h3><i class="fas fa-home"></i> Explore Villas</h3>
+          <button class="view-more-btn">View More</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="img/FormenteraElCallo.jpg" alt="Island Adventures">
+          <div class="overlay">
+            <p>Adventure awaits with snorkelling and tours.</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <h3><i class="fas fa-compass"></i> Island Adventures</h3>
+          <button class="view-more-btn">View More</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="img/FormenteraElCallo.jpg" alt="Extras for Your Booking">
+          <div class="overlay">
+            <p>Customise your experience with premium extras.</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <h3><i class="fas fa-gift"></i> Extras for Your Booking</h3>
+          <button class="view-more-btn">View More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Floating Bottom Navigation -->
+  <footer>
+    <nav class="bottom-nav glass">
+      <button class="nav-btn active">
+        <i class="fas fa-home"></i><span>Home</span>
+      </button>
+      <button class="nav-btn">
+        <i class="fas fa-clipboard-list"></i><span>Bookings</span>
+      </button>
+      <button class="nav-btn">
+        <i class="fas fa-user"></i><span>Profile</span>
+      </button>
+      <button class="nav-btn">
+        <i class="fas fa-phone-alt"></i><span>Contact</span>
+      </button>
+    </nav>
+  </footer>
+
+  <script src="/public/js/user.js"></script>
+</body>
+</html>
+
+
+
+
