@@ -28,7 +28,28 @@ requiredEnvVars.forEach((key) => {
 
 let serviceAccount;
 try {
-    // Construct service account object from individual env vars
+    const missingVars = [];
+    [
+        'FIREBASE_ADMIN_TYPE',
+        'FIREBASE_ADMIN_PROJECT_ID',
+        'FIREBASE_ADMIN_PRIVATE_KEY_ID',
+        'FIREBASE_ADMIN_PRIVATE_KEY',
+        'FIREBASE_ADMIN_CLIENT_EMAIL',
+        'FIREBASE_ADMIN_CLIENT_ID',
+        'FIREBASE_ADMIN_AUTH_URI',
+        'FIREBASE_ADMIN_TOKEN_URI',
+        'FIREBASE_ADMIN_AUTH_PROVIDER_CERT_URL',
+        'FIREBASE_ADMIN_CLIENT_CERT_URL'
+    ].forEach(varName => {
+        if (!process.env[varName]) {
+            missingVars.push(varName);
+        }
+    });
+
+    if (missingVars.length > 0) {
+        throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`);
+    }
+
     serviceAccount = {
         type: process.env.FIREBASE_ADMIN_TYPE,
         project_id: process.env.FIREBASE_ADMIN_PROJECT_ID,
@@ -47,9 +68,7 @@ try {
     });
     console.log('Firebase Admin initialized successfully');
 } catch (error) {
-    console.error('Firebase Admin initialization error:', error);
-    console.error('Project ID:', process.env.FIREBASE_ADMIN_PROJECT_ID);
-    console.error('Client Email:', process.env.FIREBASE_ADMIN_CLIENT_EMAIL);
+    console.error('Firebase Admin initialization error:', error.message);
     process.exit(1);
 }
 
