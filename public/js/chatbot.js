@@ -279,8 +279,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     window.toggleChat = () => {
         const widget = document.getElementById('chatbot-widget');
-        widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
+        widget.style.display = (widget.style.display === 'none' || widget.style.display === '') ? 'flex' : 'none';
     };
+
+    // Attach the event listener to the floating bubble
+    const bubble = document.getElementById('chatbot-floating-bubble');
+    if (bubble) {
+        bubble.addEventListener('click', window.toggleChat);
+    }
 
     window.closeChat = (event) => {
         event.stopPropagation();
