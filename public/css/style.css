@@ -4687,6 +4687,16 @@ button.mfp-arrow {
     padding: 20px;
 }
 
+.message.bot.agent {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.message.bot.system {
+    background-color: #607D8B !important;
+    color: white !important;
+    font-style: italic;
+}
 
 .app-description {
     padding-left: 20px;
