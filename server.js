@@ -65,6 +65,28 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static('public'));
 
+// In-memory storage for bot status (replace with a database in a real application)
+const botStatuses = {};
+
+// Stop Bot Endpoint
+app.post('/stop-bot', (req, res) => {
+    const { conversationId } = req.body;
+
+    if (!conversationId) {
+        return res.status(400).json({ error: 'Missing conversationId' });
+    }
+
+    // In a real application, you'd likely look up the bot's state in a database
+    // and update its status there.
+
+    // For this example, we'll just store the status in memory:
+    botStatuses[conversationId] = false; // Mark the bot as stopped
+
+    console.log(`Stopping bot for conversation ${conversationId}`);
+    res.status(200).json({ message: 'Bot stopped successfully' });
+});
+
+
 // Root Route
 app.get('/', (req, res) => {
     try {
@@ -176,4 +198,3 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on ${process.env.NODE_ENV === 'production' ? 'production' : 'localhost'}:${PORT}`);
 });
-
