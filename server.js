@@ -21,12 +21,15 @@ const requiredEnvVars = [
 ];
 
 // Ensure all required environment variables are set
-requiredEnvVars.forEach((key) => {
-    if (!process.env[key]) {
-        console.error(`Environment variable ${key} is missing.`);
-        process.exit(1);
-    }
-});
+const missingVars = requiredEnvVars.filter((key) => !process.env[key]);
+
+if (missingVars.length > 0) {
+    console.error(`Missing environment variables: ${missingVars.join(', ')}`);
+} else {
+    console.log('All required environment variables are set.');
+}
+
+
 
 // Firebase Admin initialization
 let serviceAccount;
