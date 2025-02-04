@@ -171,12 +171,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.sendMessage = async () => {
             const userInput = userInputField.value.trim();
             if (!userInput) return;
-
-            const messageId = `msg_${Date.now()}`;
-            displayMessage('user', userInput, messageId);
+        
+            const conversationRef = window.db.collection('chatConversations').doc(conversationId);
+            const convDoc = await conversationRef.get();
+            const convData = convDoc.data();
+        
             await saveMessageToFirestore('user', userInput);
             userInputField.value = '';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+            if (!convData.botEnabled) return; // Stop if bot is disabled
+        
+            if (!userDetailsSubmitted) {
+                // Your existing form logic
+            } else {
+                const botResponse = await fetchChatGPTResponse(userInput);
+                await saveMessageToFirestore('bot', botResponse);
+            }
         };
     }
 

@@ -46,8 +46,6 @@ html,
 body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    font-smoothing: antialiased;
 }
 
 * {
@@ -1266,7 +1264,7 @@ color: #91765a;
     text-transform: uppercase;
     letter-spacing: 5px;
 }
-.nav-scroll .logo-wrapper {}
+
 .logo-wrapper {
     float: left;
 }
@@ -1418,7 +1416,7 @@ color: #91765a;
         text-align: left;
         margin-left: 0px;
     }
-    .nav-scroll .logo {}
+    
     .logo-img {
         margin-bottom: 0px;
         width: 170px;
@@ -2013,7 +2011,7 @@ hr {
     font-weight: 300;
     letter-spacing: 5px;
 }
-#kenburnsSliderContainer .vegas-overlay {}
+
 @media screen and (max-width: 767px) {
 .kenburns-inner .caption h4 {
     font-size: 12px;
@@ -2276,7 +2274,7 @@ hr {
 }
 
 @media screen and (max-width: 767px) {
-    .banner-header {}
+   
     
     .banner-header.full-height h1 {
         font-size: 30px;
@@ -2292,7 +2290,7 @@ hr {
         font-size: 12px;
     }
     
-    .banner-header h5 {}
+    
 
 }
 
@@ -2876,7 +2874,7 @@ header.slider .owl-carousel .item {
     height: 0;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    
     -webkit-box-orient: vertical;
     -ms-transition: all .3s ease;
     -o-transition: all .3s ease;
@@ -3674,7 +3672,7 @@ button.mfp-arrow {
     fill: #91765a;
 }
 /* video section */
-.video-wrapper {}
+
 .video-wrapper .vid {
     position: relative;
     z-index: 8;
@@ -4912,7 +4910,7 @@ button.mfp-arrow {
 .news .item img {
     -webkit-transition: all .5s;
     transition: all .5s;
-    -webkit-filter: brightness(100%);
+    
 }
 .news .item .date {
     display: inline-block;
@@ -5868,11 +5866,12 @@ select {
     padding: 0 30px;
     border: 1px solid #aba59f;
     color: #aba59f;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+   
 }
 
-
+.special-title{
+    color: #272727;
+}
 .footer-bottom {
   position: relative;
   display: block;
