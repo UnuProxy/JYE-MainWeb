@@ -1,0 +1,535 @@
+[debug] [2025-02-04T14:10:39.059Z] ----------------------------------------------------------------------
+[debug] [2025-02-04T14:10:39.060Z] Command:       /Users/Julian/.nvm/versions/node/v18.20.5/bin/node /Users/Julian/.nvm/versions/node/v18.20.5/bin/firebase emulators:start
+[debug] [2025-02-04T14:10:39.061Z] CLI Version:   13.29.2
+[debug] [2025-02-04T14:10:39.061Z] Platform:      darwin
+[debug] [2025-02-04T14:10:39.061Z] Node Version:  v18.20.5
+[debug] [2025-02-04T14:10:39.063Z] Time:          Tue Feb 04 2025 15:10:39 GMT+0100 (Central European Standard Time)
+[debug] [2025-02-04T14:10:39.063Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-02-04T14:10:39.182Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-02-04T14:10:39.182Z] > authorizing via signed-in user (julian.pirvu@gmail.com)
+[debug] [2025-02-04T14:10:39.225Z] java version "19.0.2" 2023-01-17
+Java(TM) SE Runtime Environment (build 19.0.2+7-44)
+
+[debug] [2025-02-04T14:10:39.225Z] Java HotSpot(TM) 64-Bit Server VM (build 19.0.2+7-44, mixed mode, sharing)
+
+[debug] [2025-02-04T14:10:39.228Z] Parsed Java major version: 19
+[info] i  emulators: Starting emulators: functions, firestore, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, firestore, extensions"}}
+[debug] [2025-02-04T14:10:39.229Z] Checked if tokens are valid: true, expires at: 1738681688145
+[debug] [2025-02-04T14:10:39.229Z] Checked if tokens are valid: true, expires at: 1738681688145
+[debug] [2025-02-04T14:10:39.230Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/crm-boats [none]
+[debug] [2025-02-04T14:10:39.945Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/crm-boats 200
+[debug] [2025-02-04T14:10:39.945Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/crm-boats {"projectNumber":"129588517789","projectId":"crm-boats","lifecycleState":"ACTIVE","name":"CRM-Boats","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2024-12-21T21:51:55.114535Z"}
+[debug] [2025-02-04T14:10:40.345Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-02-04T14:10:40.345Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-02-04T14:10:40.345Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-02-04T14:10:40.345Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8085}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9151}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-02-04T14:10:40.348Z] [hub] writing locator at /var/folders/s1/w5nbzs4d6fj10hgtjxt8cx300000gn/T/hub-crm-boats.json
+[debug] [2025-02-04T14:10:40.351Z] [Extensions] Started Extensions emulator, this is a noop.
+[debug] [2025-02-04T14:10:40.564Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-02-04T14:10:40.564Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-02-04T14:10:40.564Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-02-04T14:10:40.564Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8085}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9151}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, auth, database, hosting, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, auth, database, hosting, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2025-02-04T14:10:40.566Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:40.567Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[debug] [2025-02-04T14:10:40.567Z] Checked if tokens are valid: true, expires at: 1738681688145
+[debug] [2025-02-04T14:10:40.567Z] Checked if tokens are valid: true, expires at: 1738681688145
+[debug] [2025-02-04T14:10:40.568Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/crm-boats/adminSdkConfig [none]
+[debug] [2025-02-04T14:10:40.995Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/crm-boats/adminSdkConfig 200
+[debug] [2025-02-04T14:10:40.995Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/crm-boats/adminSdkConfig {"projectId":"crm-boats","storageBucket":"crm-boats.firebasestorage.app"}
+[debug] [2025-02-04T14:10:41.019Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-02-04T14:10:41.019Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2025-02-04T14:10:41.020Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/Julian/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.8.jar","--host","127.0.0.1","--port",8085,"--websocket_port",9151,"--project_id","crm-boats","--rules","/Users/Julian/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5001"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8085} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/Julian/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.8.jar\",\"--host\",\"127.0.0.1\",\"--port\",8085,\"--websocket_port\",9151,\"--project_id\",\"crm-boats\",\"--rules\",\"/Users/Julian/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8085}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2025-02-04T14:10:41.613Z] Feb 04, 2025 3:10:41 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9151
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 04, 2025 3:10:41 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9151\n"}}
+[debug] [2025-02-04T14:10:41.627Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2025-02-04T14:10:41.627Z] 127.0.0.1:8085
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8085
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8085
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8085\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8085\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8085\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9151. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9151."}}
+[debug] [2025-02-04T14:10:41.633Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/Users/Julian/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/functions\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:41.637Z] Validating nodejs source
+[warn] ⚠  functions: Couldn't find firebase-functions package in your source code. Have you run 'npm install'? 
+[debug] [2025-02-04T14:10:41.638Z] getFunctionsSDKVersion encountered error: Cannot find module 'firebase-functions'
+Require stack:
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/versioning.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/prepare.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorShared.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulator.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/controller.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/commandUtils.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/database-get.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/bin/firebase.js {"code":"MODULE_NOT_FOUND","requireStack":["/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/versioning.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/prepare.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorShared.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulator.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/controller.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/commandUtils.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/database-get.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/bin/firebase.js"]}
+[debug] [2025-02-04T14:10:41.639Z] checkFunctionsSDKVersion encountered error: Invalid Version:  {}
+[debug] [2025-02-04T14:10:41.639Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:41.639Z] Building nodejs source
+[debug] [2025-02-04T14:10:41.640Z] Failed to find version of module node: reached end of search path /Users/Julian/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:41.640Z] Could not parse firebase-functions version '' into semver. Falling back to parseTriggers.
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Error parsing triggers: Cannot find module 'firebase-functions/v2/https'
+Require stack:
+- /Users/Julian/functions/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/triggerParser.js
+
+Try running "npm install" in your functions directory before deploying. {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Error parsing triggers: Cannot find module 'firebase-functions/v2/https'\nRequire stack:\n- /Users/Julian/functions/index.js\n- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/triggerParser.js\n\nTry running \"npm install\" in your functions directory before deploying."}}
+[info] i  functions: Watching "/Users/Julian/functions_v2" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/functions_v2\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:41.685Z] Validating nodejs source
+[warn] ⚠  functions: Couldn't find firebase-functions package in your source code. Have you run 'npm install'? 
+[debug] [2025-02-04T14:10:41.685Z] getFunctionsSDKVersion encountered error: Cannot find module 'firebase-functions'
+Require stack:
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/versioning.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/prepare.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorShared.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulator.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/controller.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/commandUtils.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/database-get.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/bin/firebase.js {"code":"MODULE_NOT_FOUND","requireStack":["/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/versioning.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/prepare.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorShared.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/functionsEmulator.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/controller.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/emulator/commandUtils.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/database-get.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/commands/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/index.js","/Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/bin/firebase.js"]}
+[debug] [2025-02-04T14:10:41.685Z] checkFunctionsSDKVersion encountered error: Invalid Version:  {}
+[debug] [2025-02-04T14:10:41.686Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:41.686Z] Building nodejs source
+[debug] [2025-02-04T14:10:41.686Z] Failed to find version of module node: reached end of search path /Users/Julian/functions_v2/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:41.686Z] Could not parse firebase-functions version '' into semver. Falling back to parseTriggers.
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Error parsing triggers: Cannot find module 'firebase-functions/v2/https'
+Require stack:
+- /Users/Julian/functions_v2/index.js
+- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/triggerParser.js
+
+Try running "npm install" in your functions directory before deploying. {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Error parsing triggers: Cannot find module 'firebase-functions/v2/https'\nRequire stack:\n- /Users/Julian/functions_v2/index.js\n- /Users/Julian/.nvm/versions/node/v18.20.5/lib/node_modules/firebase-tools/lib/deploy/functions/runtimes/node/triggerParser.js\n\nTry running \"npm install\" in your functions directory before deploying."}}
+[info] i  functions: Watching "/Users/Julian/? What should be the name of this codebase? functions_v3" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/? What should be the name of this codebase? functions_v3\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:41.726Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:42.211Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:42.211Z] Building nodejs source
+[debug] [2025-02-04T14:10:42.211Z] Failed to find version of module node: reached end of search path /Users/Julian/? What should be the name of this codebase? functions_v3/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:42.212Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:42.216Z] Found firebase-functions binary at '/Users/Julian/? What should be the name of this codebase? functions_v3/node_modules/.bin/firebase-functions'
+[info] Serving at port 8324
+
+[debug] [2025-02-04T14:10:42.452Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:42.461Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:42.461Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/functions_v4" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/functions_v4\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:42.463Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:42.936Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:42.936Z] Building nodejs source
+[debug] [2025-02-04T14:10:42.936Z] Failed to find version of module node: reached end of search path /Users/Julian/functions_v4/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:42.937Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:42.938Z] Found firebase-functions binary at '/Users/Julian/functions_v4/node_modules/.bin/firebase-functions'
+[info] Serving at port 8582
+
+[debug] [2025-02-04T14:10:43.169Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:43.176Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:43.176Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/functions_vs" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/functions_vs\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:43.178Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:43.620Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:43.620Z] Building nodejs source
+[debug] [2025-02-04T14:10:43.620Z] Failed to find version of module node: reached end of search path /Users/Julian/functions_vs/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:43.621Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:43.621Z] Found firebase-functions binary at '/Users/Julian/functions_vs/node_modules/.bin/firebase-functions'
+[info] Serving at port 8154
+
+[debug] [2025-02-04T14:10:43.844Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:43.851Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:43.851Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/functions_v6" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/functions_v6\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:43.853Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:44.292Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:44.292Z] Building nodejs source
+[debug] [2025-02-04T14:10:44.292Z] Failed to find version of module node: reached end of search path /Users/Julian/functions_v6/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:44.293Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:44.294Z] Found firebase-functions binary at '/Users/Julian/functions_v6/node_modules/.bin/firebase-functions'
+[info] Serving at port 8117
+
+[debug] [2025-02-04T14:10:44.525Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:44.532Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:44.533Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/chatbot-functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/chatbot-functions\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:44.534Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:44.959Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:44.959Z] Building nodejs source
+[debug] [2025-02-04T14:10:44.959Z] Failed to find version of module node: reached end of search path /Users/Julian/chatbot-functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2025-02-04T14:10:44.960Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:44.961Z] Found firebase-functions binary at '/Users/Julian/chatbot-functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8971
+
+[debug] [2025-02-04T14:10:45.204Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:45.211Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:45.211Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/email-functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/email-functions\" for Cloud Functions..."}}
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: could not deploy functions because the "email-functions" directory was not found. Please create it or specify a different source directory in firebase.json {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: could not deploy functions because the \u001b[1m\"email-functions\"\u001b[22m directory was not found. Please create it or specify a different source directory in firebase.json"}}
+[info] i  functions: Watching "/Users/Julian/backend-payment" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/backend-payment\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:45.213Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:45.573Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:45.573Z] Building nodejs source
+[debug] [2025-02-04T14:10:45.573Z] Failed to find version of module node: reached end of search path /Users/Julian/backend-payment/node_modules
+[warn] ⚠  functions: Your requested "node" version "22" doesn't match your global version "18". Using node@18 from host. 
+[debug] [2025-02-04T14:10:45.574Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:45.575Z] Found firebase-functions binary at '/Users/Julian/backend-payment/node_modules/.bin/firebase-functions'
+[info] Serving at port 8521
+
+[debug] [2025-02-04T14:10:46.025Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:46.032Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:46.032Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/backend-functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/backend-functions\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:46.034Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:46.433Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:46.433Z] Building nodejs source
+[debug] [2025-02-04T14:10:46.434Z] Failed to find version of module node: reached end of search path /Users/Julian/backend-functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "22" doesn't match your global version "18". Using node@18 from host. 
+[debug] [2025-02-04T14:10:46.434Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:46.435Z] Found firebase-functions binary at '/Users/Julian/backend-functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8254
+
+[debug] [2025-02-04T14:10:46.804Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:46.811Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:46.811Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/backend" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/backend\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:46.813Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:47.204Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:47.204Z] Building nodejs source
+[debug] [2025-02-04T14:10:47.204Z] Failed to find version of module node: reached end of search path /Users/Julian/backend/node_modules
+[warn] ⚠  functions: Your requested "node" version "22" doesn't match your global version "18". Using node@18 from host. 
+[debug] [2025-02-04T14:10:47.204Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:47.206Z] Found firebase-functions binary at '/Users/Julian/backend/node_modules/.bin/firebase-functions'
+[info] Serving at port 8377
+
+[debug] [2025-02-04T14:10:47.590Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:47.597Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:47.598Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] i  functions: Watching "/Users/Julian/ibiza-boat-charters-api" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/Julian/ibiza-boat-charters-api\" for Cloud Functions..."}}
+[debug] [2025-02-04T14:10:47.599Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2025-02-04T14:10:47.987Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-02-04T14:10:47.987Z] Building nodejs source
+[debug] [2025-02-04T14:10:47.987Z] Failed to find version of module node: reached end of search path /Users/Julian/ibiza-boat-charters-api/node_modules
+[warn] ⚠  functions: Your requested "node" version "22" doesn't match your global version "18". Using node@18 from host. 
+[debug] [2025-02-04T14:10:47.988Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-02-04T14:10:47.990Z] Found firebase-functions binary at '/Users/Julian/ibiza-boat-charters-api/node_modules/.bin/firebase-functions'
+[info] Serving at port 8532
+
+[debug] [2025-02-04T14:10:48.361Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-02-04T14:10:48.368Z] defaultcredentials: writing to file /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json
+[debug] [2025-02-04T14:10:48.369Z] Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/Julian/.config/firebase/julian_pirvu_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[debug] [2025-02-04T14:10:48.372Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED ::1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator   │ Host:Port      │ View in Emulator UI              │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Functions  │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions  │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore  │ 127.0.0.1:8085 │ http://127.0.0.1:4000/firestore  │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/extensions │
+└────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9151
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
