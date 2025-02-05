@@ -1,5 +1,5 @@
 // firebaseConfig.js
-async function initFirebase() {
+window.initFirebase = async function() {
     try {
         // Check if Firebase SDK is loaded
         if (!window.firebase) {
@@ -33,10 +33,33 @@ async function initFirebase() {
         console.error('Error initializing Firebase:', error);
         throw error;
     }
-}
+};
 
-// Make initFirebase available globally
-window.initFirebase = initFirebase;
+// Define toggleChat globally
+window.toggleChat = function() {
+    const widget = document.getElementById('chatbot-widget');
+    if (widget) {
+        widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'flex' : 'none';
+        if (widget.style.display === 'flex') {
+            const messagesContainer = document.getElementById('messages');
+            if (messagesContainer) {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+    }
+};
+
+// Define closeChat globally
+window.closeChat = function(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    const widget = document.getElementById('chatbot-widget');
+    if (widget) {
+        widget.style.display = 'none';
+    }
+};
 
 
 
