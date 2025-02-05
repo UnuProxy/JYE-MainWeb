@@ -555,9 +555,8 @@
                 <span id="availability-dot"></span>
             </div>
         </div>
-        <button id="close-btn" onclick="closeChat(event)">×</button>
+        <button id="close-btn" onclick="window.closeChat(event)">×</button>
     </div>
-    
     <div id="chat-container">
         <div id="messages"></div>
         <div id="user-input-container">
@@ -565,7 +564,6 @@
             <button id="send-btn">Send</button>
         </div>
     </div>
-
     <div id="form-container" style="display: none;">
         <form id="user-details-form">
             <div class="form-group">
@@ -582,7 +580,7 @@
 </div>
 
 <!-- Chat Toggle Button -->
-<button class="chat-button" onclick="toggleChat(event)">Chat with us</button>
+<button class="chat-button" onclick="window.toggleChat()">Chat with us</button>
     
     <!-- Reservation & Booking Form -->
     <section class="reservation">
@@ -746,6 +744,7 @@
 
     <!-- Custom Scripts -->
     <script src="/js/chatbot.js"></script>
+    <script src="/js/chat-functions.js"></script>
     <!-- Other Scripts (unchanged) -->
     <script src="/js/jquery-3.6.3.min.js"></script>
     <script src="/js/jquery-migrate-3.0.0.min.js"></script>

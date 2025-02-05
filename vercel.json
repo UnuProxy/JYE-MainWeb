@@ -6,6 +6,14 @@
   ],
   "routes": [
     {
+      "src": "/get-firebase-config",
+      "dest": "server.js"
+    },
+    {
+      "src": "/chat",
+      "dest": "server.js"
+    },
+    {
       "src": "^/(css|js|img|fonts|favicon\\.png)/(.*)",
       "dest": "/public/$1/$2"
     },
@@ -19,5 +27,4 @@
     }
   ]
 }
-
   
