@@ -2,252 +2,74 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <title>Just Enjoy Ibiza - Yacht Charter & Experiences</title>
-        
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="/img/just-enjoy-ibiza-favicon.png" />
-        <link rel="shortcut icon" href="/img/favicon-16x16.png"/>
-        <!-- Meta Tags -->
-        <meta name="description" content="Just Enjoy Ibiza offers exclusive yacht charters, boat rentals, corporate events, and holiday planning services. Experience the beauty of Ibiza in style with our luxury fleet.">
-        <meta name="keywords" content="Ibiza yacht charter, boat rental, yacht rental Ibiza, luxury boating, holiday planning, corporate events Ibiza">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <title>Boat Rental in Ibiza | Just Enjoy Ibiza</title>
+    
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Discover luxury yacht charters and tailored experiences in Ibiza. Explore stunning coastlines, private boat rentals, and premium concierge services for an unforgettable holiday.">
+        <meta name="keywords" content="Ibiza yacht charter, luxury boat rental Ibiza, yacht hire Ibiza, private boat tours, concierge services Ibiza">
         <meta name="author" content="Just Enjoy Ibiza">
-        
-  
-
-        <!-- Google Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/0.1.2/css/themify-icons.css">
-        
-        <!-- Local CSS Files -->
-        <link rel="stylesheet" href="/css/plugins.css" />
-        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="canonical" href="https://www.justenjoyibiza.com/" />
+    
+        <!-- Open Graph (Facebook & Social Sharing) -->
+        <meta property="og:title" content="Luxury Yacht Charters in Ibiza | Just Enjoy Ibiza">
+        <meta property="og:description" content="Experience exclusive yacht rentals and tailored luxury experiences in Ibiza. Book your private charter today.">
+        <meta property="og:image" content="https://www.justenjoyibiza.com/img/experience/VQ82SeaStory87.JPG">
+        <meta property="og:url" content="https://www.justenjoyibiza.com/">
+        <meta property="og:type" content="website">
+    
+        <!-- Twitter Card (For better visibility on Twitter) -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Luxury Yacht Charters in Ibiza | Just Enjoy Ibiza">
+        <meta name="twitter:description" content="Exclusive yacht rentals and premium boat experiences in Ibiza. Explore our fleet today.">
+        <meta name="twitter:image" content="https://www.justenjoyibiza.com/img/experience/VQ82SeaStory87.JPG">
+    
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/img/favicon-16x16.png">
+    
+        <!-- Google Fonts Preconnect for Performance -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="/css/plugins.css">
+        <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/widget.css">
-         <!-- Firebase SDK (COMPAT) -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <style>
-        .chat-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    padding: 15px 25px;
-    border-radius: 25px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-#chatbot-widget {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 350px;
-    height: 500px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-/* Header Styles */
-#chat-header {
-    background: #002b5c;
-    color: white;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-
-#agent-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#agent-photo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-}
-
-#agent-name {
-    font-size: 16px;
-    font-weight: 500;
-}
-
-
-
-#close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-}
-
-#close-btn:hover {
-    opacity: 1;
-}
-
-/* Messages Container */
-#chat-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #f0f2f5;
-}
-
-#messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-/* Message Bubbles */
-.message {
-    max-width: 85%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    font-size: 14px;
-    line-height: 1.4;
-    word-wrap: break-word;
-}
-
-.message.user {
-    background: #0084ff;
-    color: white;
-    margin-left: auto;
-    border-bottom-right-radius: 4px;
-}
-
-.message.bot {
-    background: white;
-    color: #1c1e21;
-    margin-right: auto;
-    border-bottom-left-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-/* Input Area */
-#user-input-container {
-    padding: 15px;
-    background: white;
-    border-top: 1px solid #e4e4e4;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-#user-input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #e4e4e4;
-    border-radius: 20px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-#user-input:focus {
-    border-color: #0084ff;
-}
-
-#send-btn {
-    background: #0084ff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#send-btn:hover {
-    background: #006acd;
-}
-
-/* Form Styles */
-.form-wrapper {
-    margin: 10px 15px;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-#user-details-form {
-    padding: 15px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 14px;
-    color: #65676B;
-    margin-bottom: 6px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #e4e4e4;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.form-group input:focus {
-    border-color: #0084ff;
-}
-
-#user-details-form button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background: #0084ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#user-details-form button[type="submit"]:hover {
-    background: #006acd;
-}
-    </style>
+    
+        <!-- Firebase SDK (COMPAT) -->
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+        <!-- Structured Data (JSON-LD) for SEO -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Just Enjoy Ibiza",
+          "url": "https://www.justenjoyibiza.com",
+          "logo": "https://www.justenjoyibiza.com/img/logo.png",
+          "image": "https://www.justenjoyibiza.com/img/WhiteLogo-Just-Enjoy.png",
+          "description": "Luxury yacht charter and premium boat rentals in Ibiza. Explore the Mediterranean in style with our high-end fleet and exclusive services.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ibiza",
+            "addressRegion": "Balearic Islands",
+            "addressCountry": "ES"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+34 692 688 348",
+            "contactType": "customer service"
+          }
+        }
+        </script>
     </head>
+    
     
 <body>
     <!-- Preloader -->
@@ -721,8 +543,7 @@
         </div>
     </section>
     
-    <!-- Chatbot Floating Button -->
-<button class="chat-button" onclick="toggleChat(event)">Chat with us</button>
+ 
 
 <!-- Chatbot Widget -->
 <div id="chatbot-widget" style="display: none;">
@@ -759,6 +580,9 @@
         </form>
     </div>
 </div>
+
+<!-- Chat Toggle Button -->
+<button class="chat-button" onclick="toggleChat(event)">Chat with us</button>
     
     <!-- Reservation & Booking Form -->
     <section class="reservation">
@@ -918,7 +742,7 @@
   
 
     <!-- Firebase Configuration -->
-    <script src="./firebaseConfig.js"></script>  <!-- REMOVE type="module" -->
+    <script src="/js/firebaseConfig.js"></script>  <!-- REMOVE type="module" -->
 
     <!-- Custom Scripts -->
     <script src="/js/chatbot.js"></script>
