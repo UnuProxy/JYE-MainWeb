@@ -1,191 +1,75 @@
-// Prevent multiple initializations
-if (window.chatInitialized) {
-    console.log('Chat already initialized, cleaning up old instance');
-    if (window.cleanupChat) {
-        window.cleanupChat();
-    }
-}
-
-// Message handler class for better encapsulation
-class MessageHandler {
-    constructor(db, conversationId) {
-        this.db = db;
-        this.conversationId = conversationId;
-        this.pendingMessages = new Map(); // Using Map for better timeout handling
-        this.processedMessageIds = new Set();
-        this.messageDebounceTime = 2000; // 2 seconds debounce
-    }
-
-    async saveMessage(role, content) {
-        const messageKey = `${role}-${content}-${Date.now()}`;
-        
-        // Check for pending duplicates with timeout
-        if (this.isDuplicatePending(messageKey)) {
-            return null;
-        }
-
-        // Add to pending with timeout
-        const timeoutId = setTimeout(() => {
-            this.pendingMessages.delete(messageKey);
-        }, this.messageDebounceTime);
-        
-        this.pendingMessages.set(messageKey, {
-            timestamp: Date.now(),
-            timeoutId
-        });
-
-        try {
-            const messagesRef = this.db.collection('chatConversations')
-                .doc(this.conversationId)
-                .collection('messages');
-
-            // Use transaction for atomic operations
-            const messageId = await this.db.runTransaction(async (transaction) => {
-                // Check for recent duplicates
-                const recentMessages = await transaction.get(
-                    messagesRef
-                        .orderBy('timestamp', 'desc')
-                        .limit(3)
-                );
-
-                const isDuplicate = recentMessages.docs.some(doc => {
-                    const data = doc.data();
-                    return data.role === role && 
-                           data.content === content &&
-                           Date.now() - data.timestamp.toMillis() < this.messageDebounceTime;
-                });
-
-                if (isDuplicate) {
-                    return null;
-                }
-
-                // Create new message
-                const newMessageRef = messagesRef.doc();
-                const timestamp = this.db.FieldValue.serverTimestamp();
-
-                transaction.set(newMessageRef, {
-                    role,
-                    content,
-                    timestamp,
-                    clientTimestamp: Date.now() // For local ordering
-                });
-
-                // Update conversation metadata
-                transaction.set(
-                    this.db.collection('chatConversations').doc(this.conversationId),
-                    {
-                        lastMessage: content,
-                        lastMessageAt: timestamp,
-                        lastMessageRole: role,
-                        updatedAt: timestamp
-                    },
-                    { merge: true }
-                );
-
-                return newMessageRef.id;
-            });
-
-            return messageId;
-
-        } catch (error) {
-            console.error('Error saving message:', error);
-            return null;
-        } finally {
-            // Clean up pending state
-            const pending = this.pendingMessages.get(messageKey);
-            if (pending) {
-                clearTimeout(pending.timeoutId);
-                this.pendingMessages.delete(messageKey);
-            }
-        }
-    }
-
-    isDuplicatePending(messageKey) {
-        // Check if a similar message is being processed
-        for (const [key, value] of this.pendingMessages.entries()) {
-            // Compare message keys without timestamps
-            const [currentRole, currentContent] = key.split('-');
-            const [newRole, newContent] = messageKey.split('-');
-            
-            if (currentRole === newRole && 
-                currentContent === newContent && 
-                Date.now() - value.timestamp < this.messageDebounceTime) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    displayMessage(role, content, messageId) {
-        if (this.processedMessageIds.has(messageId)) {
-            return false;
-        }
-
-        this.processedMessageIds.add(messageId);
-        return true;
-    }
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
-    if (window.chatInitialized) return;
-    window.chatInitialized = true;
-    console.log('Initializing chat...', Date.now());
-
-    // DOM Elements
+    // === DOM Elements (matching your HTML) ===
+    const chatbotWidget = document.getElementById('chatbot-widget');
     const agentNameElement = document.getElementById('agent-name');
     const agentPhoto = document.getElementById('agent-photo');
     const messagesContainer = document.getElementById('messages');
     const userInputField = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-btn');
     const BASE_API_URL = window.location.origin;
 
-    // State variables
+    // === State Variables ===
     let conversationId = localStorage.getItem('conversationId');
     let userName = localStorage.getItem('userName');
+    let userDetailsSubmitted = !!userName;
     let isAgentHandling = false;
-    let isWaitingForName = false;
+    let processedMessageIds = new Set();
 
+    // Lock flag to prevent duplicate processing
+    let isProcessingMessage = false;
+
+    // Firebase listener unsubscribe functions
+    let conversationListenerUnsubscribe = null;
+    let messagesListenerUnsubscribe = null;
+
+    // Generate a new conversationId if none exists
     if (!conversationId) {
         conversationId = `conv_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
         localStorage.setItem('conversationId', conversationId);
     }
 
-    // Initialize Firebase and Message Handler
+    // === Firebase Initialization ===
     try {
         await initFirebase();
         if (!window.db) {
-            console.error('Firestore is not initialized.');
+            console.error('Firestore not initialized. Check Firebase configuration.');
             return;
         }
         await firebase.auth().signInAnonymously();
-        const messageHandler = new MessageHandler(window.db, conversationId);
-        setupMessageListeners(messageHandler);
+        console.log("Firebase anonymous authentication successful");
+        setupMessageListeners();
     } catch (error) {
         console.error("Firebase initialization error:", error);
         return;
     }
 
+    // === Utility Functions ===
+
+    // Set agent name and image based on current time
     function setDynamicAgentName() {
         const currentHour = new Date().getHours();
-        let agentName = "Just Enjoy Ibiza";
+        let agentName = "Just Enjoy Ibiza Assistant";
         let photoSrc = "img/team/default.jpg";
-
         if (currentHour >= 7 && currentHour < 19) {
-            agentName = "Julian";
+            agentName = "Julian (Available)";
             photoSrc = "img/team/Julian-small.png";
         } else {
-            agentName = "Alin";
+            agentName = "Alin (Available)";
             photoSrc = "img/team/alin.png";
         }
-
         if (agentNameElement) agentNameElement.textContent = agentName;
         if (agentPhoto) agentPhoto.src = photoSrc;
     }
 
-    function setupMessageListeners(messageHandler) {
-        // Listen for conversation status changes
-        window.db.collection('chatConversations')
+    // Setup listeners for conversation status and messages
+    function setupMessageListeners() {
+        // Unsubscribe any existing listeners
+        if (conversationListenerUnsubscribe) conversationListenerUnsubscribe();
+        if (messagesListenerUnsubscribe) messagesListenerUnsubscribe();
+
+        conversationListenerUnsubscribe = window.db.collection('chatConversations')
             .doc(conversationId)
-            .onSnapshot((doc) => {
+            .onSnapshot(doc => {
                 const data = doc.data();
                 if (data?.status === 'agent-handling' && !isAgentHandling) {
                     isAgentHandling = true;
@@ -193,161 +77,150 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-        // Listen for new messages
-        const messagesQuery = window.db.collection('chatConversations')
+        messagesListenerUnsubscribe = window.db.collection('chatConversations')
             .doc(conversationId)
             .collection('messages')
-            .orderBy('timestamp', 'asc');
-
-        const unsubscribe = messagesQuery.onSnapshot((snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === 'added' && messageHandler.displayMessage(change.doc.data().role, change.doc.data().content, change.doc.id)) {
-                    const message = change.doc.data();
-                    renderMessage(message.role, message.content, change.doc.id);
-                }
+            .orderBy('timestamp', 'asc')
+            .onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === 'added' && !processedMessageIds.has(change.doc.id)) {
+                        const message = change.doc.data();
+                        displayMessage(message.role, message.content, change.doc.id);
+                        processedMessageIds.add(change.doc.id);
+                    }
+                });
             });
-        });
-
-        window.chatUnsubscribe = unsubscribe;
     }
 
-    function renderMessage(role, content, messageId) {
+    // Display a new message in the chat window
+    function displayMessage(role, content, messageId) {
+        if (processedMessageIds.has(messageId)) return;
+        const messageClass = role === 'user' ? 'user'
+            : role === 'agent' ? 'agent'
+            : role === 'system' ? 'system'
+            : 'bot';
+
         const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${role}`;
+        messageDiv.className = `message ${messageClass}`;
         messageDiv.setAttribute('data-message-id', messageId);
-
-        if (role === 'bot' || role === 'agent') {
-            const avatarDiv = document.createElement('div');
-            avatarDiv.className = 'message-avatar';
-            const avatarImg = document.createElement('img');
-            avatarImg.src = agentPhoto.src;
-            avatarDiv.appendChild(avatarImg);
-            messageDiv.appendChild(avatarDiv);
-        }
-
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'message-content';
-        contentDiv.textContent = content;
-        messageDiv.appendChild(contentDiv);
-
+        messageDiv.textContent = content;
         messagesContainer.appendChild(messageDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
-    function showTypingIndicator(duration = 1000) {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'message bot typing-indicator';
-        typingDiv.innerHTML = `
-            <div class="message-avatar">
-                <img src="${agentPhoto.src}" alt="Agent" />
-            </div>
-            <div class="message-content">
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-            </div>
-        `;
-        messagesContainer.appendChild(typingDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-        return new Promise(resolve => {
-            setTimeout(() => {
-                if (typingDiv && typingDiv.parentNode) {
-                    typingDiv.remove();
-                }
-                resolve();
-            }, duration);
-        });
+    // Save a message to Firestore and update conversation metadata
+    async function saveMessageToFirestore(role, content) {
+        try {
+            const conversationRef = window.db.collection('chatConversations').doc(conversationId);
+            const messageRef = await conversationRef.collection('messages').add({
+                role,
+                content,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            await conversationRef.set({
+                lastMessage: content,
+                lastMessageAt: firebase.firestore.FieldValue.serverTimestamp(),
+                lastMessageRole: role,
+                status: role === 'agent' ? 'agent-handling' : (isAgentHandling ? 'agent-handling' : 'active')
+            }, { merge: true });
+            return messageRef.id;
+        } catch (error) {
+            console.error('Error saving message:', error);
+            return null;
+        }
     }
 
+    // Handle agent takeover events
     function handleAgentTakeover(agentId) {
         isAgentHandling = true;
-        isWaitingForName = false;
-        
-        const takeoverMessage = "An agent has joined to assist you. 👋";
-        messageHandler.saveMessage('system', takeoverMessage);
-        
+        userDetailsSubmitted = true;
+        const takeoverMessage = document.createElement('div');
+        takeoverMessage.className = 'message system';
+        takeoverMessage.textContent = 'An agent has joined the conversation and will assist you shortly.';
+        messagesContainer.appendChild(takeoverMessage);
         if (agentNameElement) {
             agentNameElement.textContent = `${agentId} (Live Agent)`;
-            agentNameElement.classList.add('agent-active');
-        }
-
-        const availabilityDot = document.getElementById('availability-dot');
-        if (availabilityDot) {
-            availabilityDot.style.background = '#22c55e';
         }
     }
 
+    // === Chat Function: Process and send user message ===
     window.sendMessage = async () => {
-        const userInput = userInputField.value.trim();
-        if (!userInput) return;
+        // Lock processing if another message is in progress
+        if (isProcessingMessage) return;
+        isProcessingMessage = true;
+        if (sendButton) sendButton.disabled = true;
 
+        const userInput = userInputField.value.trim();
+        if (!userInput) {
+            isProcessingMessage = false;
+            if (sendButton) sendButton.disabled = false;
+            return;
+        }
+
+        // Save the user's message
+        await saveMessageToFirestore('user', userInput);
         userInputField.value = '';
 
         try {
-            const messageId = await messageHandler.saveMessage('user', userInput);
-            if (!messageId) {
-                console.log('Message not saved - likely duplicate');
-                return;
-            }
+            // Check conversation status from Firestore
+            const conversationDoc = await window.db.collection('chatConversations').doc(conversationId).get();
+            const conversationData = conversationDoc.data();
+            isAgentHandling = conversationData?.status === 'agent-handling';
 
+            // Only respond if an agent is not handling the conversation
             if (!isAgentHandling) {
-                if (!userName && !isWaitingForName) {
-                    isWaitingForName = true;
-                    await showTypingIndicator(1500);
-                    await messageHandler.saveMessage('bot', "Hi there! 👋 I'd love to know who I'm chatting with. What's your name?");
-                } else if (isWaitingForName) {
-                    userName = userInput;
-                    localStorage.setItem('userName', userName);
-                    isWaitingForName = false;
-
-                    await window.db.collection('chatConversations').doc(conversationId).set({
-                        userName: userName,
-                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }, { merge: true });
-
-                    await showTypingIndicator(1500);
-                    await messageHandler.saveMessage('bot', `Great to meet you, ${userName}! 😊 How can I help you today?`);
+                // If we haven't captured the user's name, prompt for it
+                if (!userDetailsSubmitted) {
+                    const name = prompt("Hi there! Please enter your full name:");
+                    if (name && name.trim()) {
+                        userName = name.trim();
+                        localStorage.setItem('userName', userName);
+                        userDetailsSubmitted = true;
+                        const conversationRef = window.db.collection('chatConversations').doc(conversationId);
+                        await conversationRef.set({
+                            userName: userName,
+                            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }, { merge: true });
+                        await saveMessageToFirestore('bot', `Great to meet you, ${userName}! How can I help?`);
+                    } else {
+                        await saveMessageToFirestore('bot', "I didn't catch your name. Please try again.");
+                    }
                 } else {
-                    await showTypingIndicator(2000);
+                    // Normal bot response flow
+                    await saveMessageToFirestore('bot', "Let me check that...");
                     try {
                         const response = await fetch(`${BASE_API_URL}/chat`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ 
-                                userMessage: userInput, 
-                                conversationId,
-                                userName 
-                            }),
+                            body: JSON.stringify({ userMessage: userInput, conversationId })
                         });
-
-                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
                         const data = await response.json();
-                        await messageHandler.saveMessage('bot', data.response || "How else can I assist you today?");
+                        await saveMessageToFirestore('bot', data.response || "I'm here to help!");
                     } catch (error) {
-                        console.error("Error fetching bot response:", error);
-                        await messageHandler.saveMessage('bot', "I'm experiencing technical difficulties. Please try again later.");
+                        console.error("API error:", error);
+                        await saveMessageToFirestore('bot', "Service temporarily unavailable.");
                     }
                 }
             }
+            // If an agent is handling, do not generate a bot response.
         } catch (error) {
-            console.error('Error in message handling:', error);
+            console.error('Error checking conversation status:', error);
+        } finally {
+            isProcessingMessage = false;
+            if (sendButton) sendButton.disabled = false;
         }
     };
 
+    // === Chat Toggle and Close Functions ===
     window.toggleChat = () => {
-        const widget = document.getElementById('chatbot-widget');
-        const isHidden = widget.style.display === 'none' || widget.style.display === '';
-        widget.style.display = isHidden ? 'flex' : 'none';
-        
-        if (isHidden) {
+        if (!chatbotWidget) return;
+        // Toggle display state
+        chatbotWidget.style.display = (chatbotWidget.style.display === 'none' || chatbotWidget.style.display === '')
+            ? 'flex'
+            : 'none';
+        if (chatbotWidget.style.display === 'flex' && messagesContainer) {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            if (!userName && !messageHandler.processedMessageIds.size) {
-                showTypingIndicator(1500).then(() => {
-                    messageHandler.saveMessage('bot', "Hi there! 👋 I'd love to know who I'm chatting with. What's your name?");
-                    isWaitingForName = true;
-                });
-            }
         }
     };
 
@@ -356,29 +229,33 @@ document.addEventListener('DOMContentLoaded', async () => {
             event.preventDefault();
             event.stopPropagation();
         }
-        document.getElementById('chatbot-widget').style.display = 'none';
+        if (chatbotWidget) {
+            chatbotWidget.style.display = 'none';
+        }
+        // Unsubscribe Firebase listeners on close
+        if (conversationListenerUnsubscribe) conversationListenerUnsubscribe();
+        if (messagesListenerUnsubscribe) messagesListenerUnsubscribe();
     };
 
-    // Event listeners
-    userInputField?.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            window.sendMessage();
-        }
-    });
+    // === Attach Event Listeners ===
+    if (sendButton) {
+        sendButton.addEventListener('click', window.sendMessage);
+    }
+    if (userInputField) {
+        userInputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                window.sendMessage();
+            }
+        });
+    }
 
-    const sendButton = document.getElementById('send-btn');
-    sendButton?.addEventListener('click', window.sendMessage);
-
-    // Initialize
+    // Set the initial dynamic agent name
     setDynamicAgentName();
-
-    // Cleanup function
-    window.cleanupChat = () => {
-        if (window.chatUnsubscribe) {
-            window.chatUnsubscribe();
-        }
-        window.chatInitialized = false;
-    };
 });
+
+
+
+
 
 
